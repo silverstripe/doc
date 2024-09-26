@@ -172,13 +172,13 @@ The template to use for a given action is determined in the following order:
 1. If a template has been explicitly declared for the "index" action in the `templates` property, it will be used (regardless of what action is being rendered).
 1. If the `template` property has been set at all, its value will be used.
 1. If a template exists with the name of this class or any of its ancestors, suffixed with the name of the action name, it will be used.
-    - e.g. for the `App\Control\TeamController` example, the "showPlayers" action would look for `templates/App/Control/TeamController_showPlayers.ss` and `templates/SilverStripe/Control/Controller_showPlayers.ss`.
+    - e.g. for the `App\Control\TeamController` example, the "showPlayers" action would look for templates named `templates/App/Control/TeamController_showPlayers` and `templates/SilverStripe/Control/Controller_showPlayers` with the relevant file extension.
     - Note that the "index" action skips this step.
 1. If a template exists with the name of this class or any of its ancestors (with no suffix), it will be used.
-    - e.g. for the `App\Control\TeamController` example, it would look for `templates/App/Control/TeamController.ss` and `templates/SilverStripe/Control/Controller.ss`.
+    - e.g. for the `App\Control\TeamController` example, it would look for templates named `templates/App/Control/TeamController` and `templates/SilverStripe/Control/Controller` with the relevant file extension.
 
 > [!NOTE]
-> Subclasses of `ContentController` additionally check for templates named similarly to the model the controller represents - for example a `HomePageController` class which represents a `HomePage` model will look for `HomePage_{action}.ss` after checking `HomePageController_{action}.ss`.
+> Subclasses of `ContentController` additionally check for templates named similarly to the model the controller represents - for example a `HomePageController` class which represents a `HomePage` model will look for a `HomePage_{action}` template after checking `HomePageController_{action}`.
 
 You can declare templates to be used for an action by setting the `templates` array. The key should be the name of the action,
 and the value should be a template name, or array of template names in cascading precedence.

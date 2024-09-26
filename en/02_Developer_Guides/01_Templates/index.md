@@ -12,8 +12,8 @@ core framework, the modules or themes you install, and your own custom templates
 
 Silverstripe CMS templates are simple text files that have an `.ss` extension. They can contain any markup language (e.g HTML,
 XML, JSON..) and can include features such as variables and logic controls such as conditionals.
-In this guide we'll look at the syntax of the custom template engine [`SSViewer`](api:SilverStripe\View\SSViewer) and how to render
-templates from your controllers.
+
+In this section we'll look at the syntax of the default template engine and how to render templates from your controllers. Note that anything referencing `SSViewer` should apply regardless of which template engine you use.
 
 [CHILDREN Exclude=How_Tos]
 

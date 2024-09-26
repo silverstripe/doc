@@ -6,8 +6,7 @@ icon: code
 
 # Template syntax
 
-A template can contain any markup language (e.g HTML, CSV, JSON, etc) and before being rendered to the user, they're
-processed through [SSViewer](api:SilverStripe\View\SSViewer). This process replaces placeholders such as `$Var` with real content from your
+A template can contain any markup language (e.g HTML, CSV, JSON, etc). The rendering process replaces placeholders such as `$Var` with real content from your
 model (see [Model and Databases](../model)) and allows you to use logic like `<% if $Var %>` in your templates.
 
 An example of a Silverstripe CMS template is below:
@@ -69,32 +68,33 @@ This will result in trying to fetch a `Title` property from the data being displ
 Variables can be chained together, and include arguments.
 
 ```ss
-$Foo(param)
+$Foo("param")
 $Foo.Bar
 ```
 
 These variables will call a method / field on the object and insert the returned value as a string into the template.
 
+Arguments don't have to be literals - you can pass template variables as arguments as well.
+
 > [!WARNING]
-> If you wish to pass arguments to getter functions, you must use the full method name. e.g. `$Thing` will try to access `Thing` as a property, which will ultimately result in `getThing()` being called with no arguments To pass arguments you must use `$getThing('param')`.
->
-> Also, arguments must be literals, and cannot be other template variables (`$getThing($variable)` will pass the literal string `'$variable'` to the `getThing()` method).
+> Arguments cannot be literal arrays (e.g `$myMethod(["val1", "val2"])`). The behaviour for this is currently undefined.
 
 - `$Foo("param")` will call `$obj->Foo("param")`
 - `$Foo.Bar` will call `$obj->Foo()->Bar`
+- `$Foo($Bar)` will call `$obj->Bar` and then pass the result into `$obj->Foo($result)`
 
 > [!NOTE]
-> Arguments passed into methods can be any non-array literal type (not just strings), e.g:
+> Arguments passed into methods can be almost any type (not just strings), e.g:
 >
 > - `$Foo(1)` will pass `1` as an int
 > - `$Foo(0.5)` will pass `0.5` as a float
 > - `$Foo(true)` will pass `true` as a boolean
 > - `$Foo(null)` will pass `null` as a null primitive
-> - `$Foo("param")`, `$Foo('param')`, and `$Foo(param)` will all pass `'param'` as a string. It is recommended that you always use quotes when passing a string for clarity
+> - `$Foo("param")`, `$Foo('param')`, and `$Foo(param)` will all pass `'param'` as a string. It is recommended that you always use quotes when passing a string for clarity and for future-proofing.
 
 If a variable returns a string, that string will be inserted into the template. If the variable returns an object, then
 the system will attempt to render the object through its `forTemplate()` method. If the `forTemplate()` method has not
-been defined, the system will return an error.
+been defined, the system will attempt to cast the object to a string.
 
 > [!NOTE]
 > For more details around how variables are inserted and formatted into a template see
@@ -111,8 +111,7 @@ use SilverStripe\ORM\DataObject;
 class MyObject extends DataObject
 {
     // ...
-
-    public function UsersIpAddress()
+    public function usersIpAddress()
     {
         return $this->getRequest()->getIP();
     }
@@ -125,10 +124,11 @@ class MyObject extends DataObject
 ```
 
 > [!NOTE]
-> Method names that begin with `get` will automatically be resolved when their prefix is excluded. For example, the above method call `$UsersIpAddress` would also invoke a method named `getUsersIpAddress()`.
+> Method names that begin with `get` will automatically be resolved when their prefix is excluded. For example, if the method `usersIpAddress()` didn't exist, the above reference to `$UsersIpAddress` would invoke a method named `getUsersIpAddress()`.
+> Note that a method with the exact name you're referencing will always be used if it exists.
 
 The variables that can be used in a template vary based on the object currently in scope (see [scope](#scope) below). Scope defines what
-object the methods get called on. For the standard `Page.ss` template the scope is the current [`ContentController`](api:SilverStripe\CMS\Controllers\ContentController)
+object the methods get called on. For the standard `Page.ss` template the scope is usually the current [`ContentController`](api:SilverStripe\CMS\Controllers\ContentController)
 object. This object provides access to all the public methods on that controller, as well as the public methods, relations, and database fields for its corresponding [`SiteTree`](api:SilverStripe\CMS\Model\SiteTree) record.
 
 ```ss
@@ -140,6 +140,12 @@ $SilverStripeNavigator
 <%-- prints the `Content` database field from the page record --%>
 $Content
 ```
+
+### Case sensitivity
+
+Just like in PHP, method names are case insensitive, but property names are case sensitive.
+
+Using `$MyValue` in a template will successfully call a `myValue()` method, or a `getMyValue()` method even though the case doesn't match what you used in the template. But it *will not* match a `myValue` property or database field because the case doesn't match.
 
 ## Conditional logic
 
@@ -206,7 +212,7 @@ For more nuanced conditions you can use the `!=` operator.
 
 ### Boolean logic
 
-Multiple checks can be done using `||`/`or`, or `&&`/ `and`.
+Multiple checks can be done using `||`/`or`, or `&&`/`and`.
 
 > [!NOTE]
 > `or` is functionally equivalent to `||` in template conditions, and `and` is functionally equivalent to `&&`.
@@ -564,27 +570,12 @@ refer directly to properties and methods of the [`Member`](api:SilverStripe\Secu
 
 ### `fortemplate()` and `$Me` {#fortemplate}
 
-If you reference some `ModelData` object directly in a template, the `forTemplate()` method on that object will be called.
-This can be used to provide a default template for an object.
-
-```php
-// app/src/PageType/HomePage.php
-namespace App\PageType;
-
-use Page;
-
-class HomePage extends Page
-{
-    public function forTemplate(): string
-    {
-        // We can also render a template here using $this->renderWith()
-        return 'Page: ' . $this->Title;
-    }
-}
-```
+If you reference some object directly in a template, the `forTemplate()` method on that object will be called. This can be used to provide a default template for an object.
+If the `forTemplate()` method isn't implemented, the system will attempt to cast your object to a string.
+The default implementation of this method on `ModelData` renders the model using templates named after the class or its superclasses.
 
 ```ss
-<%-- calls forTemplate() on the first page in the list and prints Page: Home --%>
+<%-- calls forTemplate() on the first page in the list --%>
 $Pages->First
 ```
 
@@ -592,11 +583,11 @@ You can also use the `$Me` variable, which outputs the current object in scope b
 This is especially helpful when you want to directly render items in a list you're looping over.
 
 > [!WARNING]
-> If the object does not have a `forTemplate()` method implemented, this will throw an error.
+> If the object does not have an appropriate template, implement the `forTemplate()` method, or implement [`__toString()`](https://www.php.net/manual/en/language.oop5.magic.php#object.tostring), this will throw an error.
 
 ```ss
 <% loop $Pages %>
-    <%-- calls forTemplate() on the current object in scope and prints Page: Home --%>
+    <%-- calls forTemplate() on the current object in scope --%>
     $Me
 <% end_loop %>
 ```

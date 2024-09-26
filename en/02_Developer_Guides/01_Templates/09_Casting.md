@@ -6,13 +6,17 @@ icon: code
 
 # Formatting, casting, and escaping variable content
 
-All objects that are being rendered in a template should be a [ModelData](api:SilverStripe\Model\ModelData) instance such as `DataObject`,
-`DBField` or `Controller`. From these objects, the template can include any method from the object in [scope](syntax#scope).
+Classes that subclass [`ModelData`](api:SilverStripe\Model\ModelData) (such as `DataObject`,
+`DBField` or `Controller`) can define how their values should be cast or escaped when used in a template.
+
+Most of the details on this page refer to casting values using the configuration on `ModelData`.
 
 ## Casting
 
-The templating system casts variables and the result of method calls into one of the various [`DBField`](api:SilverStripe\ORM\FieldType\DBField)
-classes before outputting them in the final rendered markup. Those `DBField` classes provide methods that developers can use to format data in
+The templating system casts variables and the result of method calls into objects (usually one of the various [`DBField`](api:SilverStripe\ORM\FieldType\DBField)
+classes) before outputting them in the final rendered markup. This casting functionality lives in the [`CastingService`](api:SilverStripe\View\CastingService) class.
+
+`DBField` classes provide methods that developers can use to format data in
 the template (e.g. choosing how to format a date), as well as defining whether HTML markup in that data will be escaped, stripped, or included
 directly in the rendered result.
 
@@ -21,6 +25,8 @@ content that method sends back, or provide a type (using the same format as the 
 [Data types and casting](/developer_guides/model/data_types_and_casting/)) in the `$casting` array for the object. When rendering that method
 to a template, Silverstripe CMS will ensure that the object is wrapped in the correct type. This provides you with all of the methods available in
 that class, and ensures and values are safely escaped.
+
+Note that if an object is returned from the method, that object will be retained instead of using the `$casting` configuration.
 
 ```php
 namespace App\Data;
@@ -43,13 +49,8 @@ class MyTemplatedObject extends ModelData
 When calling `$MyCustomMethod` on the above object from a template, Silverstripe CMS now has the context that this method contains HTML, so it
 won't escape the value.
 
-For every field used in templates, a casting helper will be applied. This will first check for any
-`casting` helper on your model specific to that field, and will fall back to the `default_cast` config
-in case none are specified.
-
 > [!NOTE]
-> By default, all content without a type explicitly defined in a `$casting` array will use the `ModelData.default_cast` configuration. By default,
-> that configuration is set to `Text`, so HTML characters are escaped.
+> By default, all non-object values without a type explicitly defined in a `$casting` configuration will be cast to an appropriate `DBField` implementation (e.g. booleans are cast to [`DBBoolean`](api:SilverStripe\ORM\FieldType\DBBoolean)), except array which are wrapped in either [`ArrayList`](api:SilverStripe\Model\List\ArrayList) (for indexed arrays) or [`ArrayData`](api:SilverStripe\Model\ArrayData) (for associative arrays).
 
 ### Common casting types
 
@@ -127,7 +128,7 @@ All `DBField` instances share the following useful methods for formatting their 
 The concept of escaping values in templates is ultimately just a combination of formatting and casting.
 
 Values are typically escaped (i.e. the special HTML characters are encoded) in templates by either not
-declaring a casting type, or by defaulting to the `Text` casting type defined on `ModelData`.
+declaring a casting type, or by defaulting to the `Text` casting type.
 
 See the [casting](#casting) section above for
 instructions on configuring your model to declare casting types for fields, and how some of the more common

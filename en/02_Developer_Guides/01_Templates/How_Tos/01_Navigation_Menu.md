@@ -8,7 +8,7 @@ summary: Build a multi-tiered navigation UI.
 In this how-to, we'll create a simple menu which you can use as the primary navigation for your website. This outputs a
 top level menu with a nested second level using the `Menu` loop and a `Children` loop.
 
-This template relies on the [`Menu()`](api:SilverStripe\Controllers\ContentController::Menu()) method available via the [`ContentController`](api:SilverStripe\Controllers\ContentController) on all [`SiteTree`](api:SilverStripe\CMS\Model\SiteTree) records. The number passed in is the level to start the menu from, where `1` is the root level pages.
+This template relies on the [`getMenu()`](api:SilverStripe\Controllers\ContentController::getMenu()) method available via the [`ContentController`](api:SilverStripe\Controllers\ContentController) on all [`SiteTree`](api:SilverStripe\CMS\Model\SiteTree) records. The number passed in is the level to start the menu from, where `1` is the root level pages.
 
 ```ss
 <%-- app/templates/Page.ss --%>

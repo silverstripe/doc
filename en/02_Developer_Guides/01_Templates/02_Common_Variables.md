@@ -36,11 +36,11 @@ have a read of the [Formatting, Modifying and Casting Variables](casting) docume
 </head>
 ```
 
-The `<% base_tag %>` placeholder is replaced with the HTML base element. Relative links within a document (such as
+The `<% base_tag %>` placeholder is replaced with the HTML `<base>` element. Relative links within a document (such as
 `<img src="someimage.jpg" alt="">`) will become relative to the URI specified in the base tag. This ensures the
 browser knows where to locate your site’s images and CSS files.
 
-It renders in the template as `<base href="https://www.example.com" /><!--[if lte IE 6]></base><![endif]-->`
+It renders in the template as `<base href="https://www.example.com/">`
 
 > [!CAUTION]
 > A `<% base_tag %>` is nearly always required or assumed by Silverstripe CMS to exist.
@@ -117,7 +117,7 @@ on a per-page basis.
 
 By default `$MetaTags` renders (assuming 5.1.0 is the current version of `silverstripe/framework`):
 
-```ss
+```html
 <title>Title of the Page</title>
 <meta name="generator" content="Silverstripe CMS 5.1">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
@@ -125,12 +125,12 @@ By default `$MetaTags` renders (assuming 5.1.0 is the current version of `silver
 
 `$MetaTags(false)` will render
 
-```ss
+```html
 <meta name="generator" content="Silverstripe CMS 5.1">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 ```
 
-If using `$MetaTags(false)` we can provide a more custom `title`.
+If using `$MetaTags(false)` we can provide a custom `<title> tag`.
 
 ```ss
 $MetaTags(false)
