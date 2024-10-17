@@ -13,10 +13,10 @@ by the [jstree](https://jstree.com) library. It is configured through
 `client/src/legacy/LeftAndMain.Tree.js` in the `silverstripe/admin` module, as well as some
 HTML5 metadata generated on its container (see the `data-hints` attribute).
 
-The tree is rendered through [LeftAndMain::getSiteTreeFor()](api:SilverStripe\Admin\LeftAndMain::getSiteTreeFor()),
+The tree is rendered through [`CMSMain::getTreeFor()`](api:SilverStripe\CMS\Controllers\CMSMain::getTreeFor()),
 which recursively collects all nodes based on various filtering criteria.
-The node strictly just has to implement the [Hierarchy](api:SilverStripe\ORM\Hierarchy\Hierarchy) extension,
-but in the CMS usually is a [SiteTree](api:SilverStripe\CMS\Model\SiteTree) object.
+The node strictly just has to implement the [`Hierarchy`](api:SilverStripe\ORM\Hierarchy\Hierarchy) extension,
+but in the CMS usually is a [`SiteTree`](api:SilverStripe\CMS\Model\SiteTree) object.
 
 ## Add status flags to tree nodes
 
@@ -36,7 +36,7 @@ code like this:
             <ins class="jstree-checkbox">&nbsp;</ins>
             <ins class="jstree-icon">&nbsp;</ins>
             <span class="text">
-                <span class="jstree-pageicon"></span>
+                <span class="jstree-recordicon"></span>
                 <span class="item" title="Deleted">New Page</span>
                 <span class="badge deletedonlive">Deleted</span>
             </span>
@@ -65,7 +65,7 @@ use Page;
 
 class HomePage extends Page
 {
-    private static $icon_class = 'font-icon-p-home';
+    private static $cms_icon_class = 'font-icon-p-home';
 
     // ...
 }

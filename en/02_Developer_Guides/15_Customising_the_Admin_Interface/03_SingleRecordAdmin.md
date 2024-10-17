@@ -27,7 +27,7 @@ class MySettingsAdmin extends SingleRecordAdmin
 
 This admin section will fetch a record of the `MySettingsModel` class using the [`get_one()`](api:SilverStripe\ORM\DataObject::get_one()) method.
 
-If you don't want the admin section to fetch your record in this way, you can set the [`restrict_to_single_record`](api:SilverStripe\Admin\SingleRecordAdmin->restrict_to_single_record) configuration property to false. In this case you must provide another way for the admin section to know which record to edit. This could be in the form of a separate action on the controller (e.g. `edit/$ID`), or by calling [`setCurrentPageID()`](api:SilverStripe\Admin\LeftAndMain::setCurrentPageID()) in the [`init()`](api:SilverStripe\Admin\LeftAndMain::init()) method of the controller.
+If you don't want the admin section to fetch your record in this way, you can set the [`restrict_to_single_record`](api:SilverStripe\Admin\SingleRecordAdmin->restrict_to_single_record) configuration property to false. In this case you must provide another way for the admin section to know which record to edit. This could be in the form of a separate action on the controller (e.g. `edit/$ID`), or by calling [`setCurrentRecordID()`](api:SilverStripe\Admin\LeftAndMain::setCurrentRecordID()) in the [`init()`](api:SilverStripe\Admin\LeftAndMain::init()) method of the controller.
 
 If there's no record to edit, by default it will create one for you. To disable that behaviour, set the [`allow_new_record`](api:SilverStripe\Admin\SingleRecordAdmin->allow_new_record) configuration property to false.
 
