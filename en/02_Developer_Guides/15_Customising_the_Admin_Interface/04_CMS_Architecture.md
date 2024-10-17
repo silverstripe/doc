@@ -449,7 +449,7 @@ class MyAdmin extends LeftAndMain
 ```ss
 <%-- MyRecordInfo.ss --%>
 <div data-pjax-fragment="MyRecordInfo">
-    Current Record: $currentPage.Title
+    Current Record: $currentRecord.Title
 </div>
 ```
 
