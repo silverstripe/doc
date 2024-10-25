@@ -89,6 +89,8 @@ public function getMyHtmlVarcharField()
 > See [Data types and Casting](/developer_guides/model/data_types_and_casting/#overriding) for more information about getter methods.
 
 ## Defining custom shortcodes
+With custom shortscodes it is not only possible to add new shortcodes but it is also possible to edit the default behaviour of the CMS.
+
 
 First we need to define a callback for the shortcode. These callbacks are usually static methods on some class, but they can also be anonymous functions or any other valid PHP callback.
 
