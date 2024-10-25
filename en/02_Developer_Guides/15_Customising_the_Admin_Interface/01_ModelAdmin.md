@@ -1,11 +1,11 @@
 ---
-title: ModelAdmin
-summary: Create admin UI's for managing your data records.
+title: Managing Multiple Records
+summary: Create admin UI's for managing multiple records at once with ModelAdmin
 ---
 
-# ModelAdmin
+# Managing multiple records
 
-[ModelAdmin](api:SilverStripe\Admin\ModelAdmin) provides a simple way to utilize the Silverstripe CMS UI with your own data models. It can create
+[ModelAdmin](api:SilverStripe\Admin\ModelAdmin) provides a simple way to manage multiple records at once with your own data models. It can create
 searchables list and edit views of [DataObject](api:SilverStripe\ORM\DataObject) subclasses, and even provides import and export of your data.
 
 It uses the framework's knowledge about the model to provide sensible defaults, allowing you to get started in a couple
