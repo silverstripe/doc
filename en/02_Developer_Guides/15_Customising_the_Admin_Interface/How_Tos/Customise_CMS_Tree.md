@@ -50,7 +50,7 @@ code like this:
 By applying the proper style sheet, the snippet html above could produce the look of:
 ![Page Node Screenshot](../../../_images/tree_node.png "Page Node")
 
-SiteTree is a [DataObject](api:SilverStripe\ORM\DataObject) which is versioned by [Versioned](api:SilverStripe\Versioned\Versioned) extension.
+SiteTree is a [DataObject](api:SilverStripe\ORM\DataObject) which is versioned by [Versioned](api:SilverStripe\Versioned\Mode\Versioned) extension.
 Each node can optionally have publication status flags, e.g. "Removed from draft".
 Each flag has a unique identifier, which is also used as a CSS class for easier styling.
 

@@ -57,7 +57,7 @@ Here is how it works in detail:
    won't have any effect until template recompilation (e.g. on cache flush).
 
    By default it equals to `'$CurrentReadingMode, $CurrentUser.ID'`.
-   This ensures the current [Versioned](api:SilverStripe\Versioned\Versioned) state and user ID are used.
+   This ensures the current [Versioned](api:SilverStripe\Versioned\Mode\Versioned) state and user ID are used.
    At runtime that will become something like `'LIVE, 0'` (for unauthenticated users in live mode).
 
    As usual, you may override its value via YAML configs. For example:

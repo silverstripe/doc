@@ -136,11 +136,11 @@ if ($file) {
 }
 ```
 
-Note that you can cause the file to be moved immediately by [setting the Versioned reading mode](api:SilverStripe\Versioned\Versioned::set_reading_mode()) to draft temporarily.
+Note that you can cause the file to be moved immediately by [setting the Versioned reading mode](api:SilverStripe\Versioned\Mode\Versioned::set_reading_mode()) to draft temporarily.
 
 ```php
 use SilverStripe\Assets\File;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 $file = File::get()->filter('Name', 'oldname.jpg')->first();
 if ($file) {

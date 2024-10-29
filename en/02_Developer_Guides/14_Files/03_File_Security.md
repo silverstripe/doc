@@ -422,7 +422,7 @@ the `Versioned` extension.
 namespace App\Model;
 
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 class MyVersionedObject extends DataObject
 {

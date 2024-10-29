@@ -98,7 +98,7 @@ an inline PDF document in the preview panel.
 ### Preview states {#preview-states-php}
 
 The preview state(s) you apply to your `DataObject` will depend primarily on whether it uses
-the [Versioned](api:SilverStripe\Versioned\Versioned) extension or not.
+the [Versioned](api:SilverStripe\Versioned\Mode\Versioned) extension or not.
 
 #### Versioned `DataObject` models
 
@@ -491,7 +491,7 @@ namespace App\Model;
 use App\PageType\ProductPage;
 use SilverStripe\ORM\CMSPreviewable;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 class Product extends DataObject implements CMSPreviewable
 {

@@ -107,7 +107,7 @@ namespace App\Test;
 
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Dev\SapphireTest;
-use SilverStripe\Versioned\Versioned;
+use SilverStripe\Versioned\Mode\Versioned;
 
 class PageTest extends SapphireTest
 {
