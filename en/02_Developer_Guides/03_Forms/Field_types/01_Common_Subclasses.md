@@ -60,7 +60,7 @@ doesn't necessarily have any visible styling.
 - [GridField](api:SilverStripe\Forms\GridField\GridField): Displays a [SS_List](api:SilverStripe\Model\List\SS_List) in a tabular format. Versatile base class which can be configured to allow editing, sorting, etc.
 - [ListboxField](api:SilverStripe\Forms\ListboxField): Multi-line listbox field, through `<select multiple>`.
 - [SearchableDropdownField](api:SilverStripe\Forms\SearchableDropdownField): Dropdown field with optional type to search and optional AJAX lazy loading.
-- [SearchableMutliDropdownField](api:SilverStripe\Forms\SearchableMutliDropdownField): Multi-select field with optional type to search and optional AJAX lazy loading.
+- [SearchableMultiDropdownField](api:SilverStripe\Forms\SearchableMultiDropdownField): Multi-select field with optional type to search and optional AJAX lazy loading.
 
 ## Utility
 
