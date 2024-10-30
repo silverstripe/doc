@@ -25,13 +25,13 @@ directory (usually `app/templates/`), it'll take priority over the built-in
 one.
 
 CMS templates are inherited based on their controllers, similar to subclasses of
-the common `Page` object (a new PHP class `MyPage` will look for a `MyPage.ss` template).
-We can use this to create a different base template with `LeftAndMain.ss`
+the common `Page` object (a new PHP class `MyPage` will look for a template named `MyPage`).
+We can use this to create a different base template named `LeftAndMain`
 (which corresponds to the `LeftAndMain` PHP controller class).
 
-Copy the template markup of the base implementation at `templates/SilverStripe/Admin/Includes/LeftAndMain_MenuList.ss`
-from the `silverstripe/admin` module
-into `app/templates/SilverStripe/Admin/Includes/LeftAndMain_MenuList.ss`. It will automatically be picked up by
+Copy the template markup of the base implementation in the `templates/SilverStripe/Admin/Includes/LeftAndMain_MenuList`
+template from the `silverstripe/admin` module
+into a new `app/templates/SilverStripe/Admin/Includes/LeftAndMain_MenuList` template. It will automatically be picked up by
 the CMS logic. Add a new section into the `<ul class="cms-menu__list">`
 
 ```ss
@@ -173,7 +173,7 @@ SilverStripe\Admin\LeftAndMain:
 ```
 
 As the last step, replace the hardcoded links with our list from the database.
-Find the `<ul>` you created earlier in `app/templates/SilverStripe/Admin/Includes/LeftAndMain_MenuList.ss`
+Find the `<ul>` you created earlier in the `app/templates/SilverStripe/Admin/Includes/LeftAndMain_MenuList` template
 and replace it with the following:
 
 ```ss

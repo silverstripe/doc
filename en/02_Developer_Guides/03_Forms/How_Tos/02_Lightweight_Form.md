@@ -60,7 +60,7 @@ class SearchPage extends Page
 </form>
 ```
 
-`SearchForm.ss` will be executed within the scope of the `Form` object so has access to any of the methods and
+The `SearchForm` template will be executed within the scope of the `Form` object so has access to any of the methods and
 properties on [Form](api:SilverStripe\Forms\Form) such as `$Fields` and `$Actions`.
 
 > [!WARNING]

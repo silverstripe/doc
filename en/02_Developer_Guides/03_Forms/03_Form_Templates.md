@@ -22,17 +22,17 @@ To override the template for CMS forms, the custom templates should be located i
 
 > [!WARNING]
 > It's recommended to copy the contents of the template you're going to replace and use that as a start. For instance, if
-> you want to create a `MyCustomFormTemplate` copy the contents of `Form.ss` to a `MyCustomFormTemplate.ss` file and
+> you want to create a `MyCustomFormTemplate` copy the contents of the `Form` template to a `MyCustomFormTemplate` template file and
 > modify as you need.
 >
-> *The default Form.ss can be found at `/vendor/silverstripe/framework/templates/SilverStripe/Forms/Includes/Form.ss`*
+> *The default Form template file can be found at `/vendor/silverstripe/framework/templates/SilverStripe/Forms/Includes/Form.ss`*
 
 By default, `Form` and the various `FormField` subclasses follow the Silverstripe CMS Template convention and are rendered into templates of the same
-class name (i.e.`EmailField` will attempt to render into `EmailField.ss` and if that isn't found, `TextField.ss` or
-finally `FormField.ss`).
+class name (i.e.`EmailField` will attempt to render into a template called `EmailField` and if that isn't found, `TextField` or
+finally `FormField`).
 
 > [!CAUTION]
-> While you can override all templates using normal view inheritance (i.e.defining a `Form.ss`) other modules may rely on
+> While you can override all templates using normal view inheritance (i.e.defining a `Form` template) other modules may rely on
 > the core template structure. It is recommended to use `setTemplate` and unique templates for specific forms.
 
 For [`FormField`](api:SilverStripe\Forms\FormField) instances, there are several other templates that are used on top of the main `setTemplate()`.

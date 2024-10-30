@@ -32,7 +32,7 @@ We use `app/` as the default folder.
 | `app/_config`    | YAML configuration specific to your application                    |
 | `app/src`        | PHP code specific to your application (subdirectories are optional)     |
 | `app/tests`      | PHP unit/functional/end-to-end tests                                                      |
-| `app/templates`  | HTML [templates](/developer_guides/templates) with `*.ss-extension` for the `$default` theme   |
+| `app/templates`  | [templates](/developer_guides/templates) for the `$default` theme   |
 | `app/client/src` | Conventional directory for source resources (images/CSS/JavaScript) for your CMS customisations |
 | `app/client/dist` | Conventional directory for transpiled resources (images/CSS/JavaScript) for your CMS customisations |
 | `app/client/lang` | Conventional directory for [JavaScript translation tables](/developer_guides/i18n/#translation-tables-in-javascript) |

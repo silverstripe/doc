@@ -272,27 +272,6 @@ list of items and indirectly calling `forTemplate` using the [`$Me` template var
 This method will be used by the `cmsPreview` action in the `MyAdmin` class to tell the
 CMS what to display in the preview panel.
 
-The `forTemplate` method will probably look something like this:
-
-```php
-namespace App\Model;
-
-use SilverStripe\ORM\CMSPreviewable;
-use SilverStripe\ORM\DataObject;
-
-class Product extends DataObject implements CMSPreviewable
-{
-    // ...
-
-    public function forTemplate(): string
-    {
-        // If the template for this DataObject is not an "Include" template, use the appropriate type here
-        // e.g. "Layout".
-        return $this->renderWith(['type' => 'Includes', self::class]);
-    }
-}
-```
-
 #### The `ModelAdmin` implementation
 
 We need to add the `cmsPreview` action to the `MyAdmin` class, which will output the
@@ -388,7 +367,6 @@ class MyAdmin extends ModelAdmin
 > namespace App\Admin;
 >
 > use SilverStripe\Admin\ModelAdmin;
-> use SilverStripe\Model\ArrayData;
 > use SilverStripe\View\Requirements;
 > use SilverStripe\View\SSViewer;
 >
@@ -405,7 +383,7 @@ class MyAdmin extends ModelAdmin
 >         // Render the preview content
 >         $preview = $obj->forTemplate();
 >         // Wrap preview in proper html, body, etc so Requirements are used
->         $preview = SSViewer::create('PreviewBase')->process(ArrayData::create(['Preview' => $preview]));
+>         $preview = SSViewer::create('PreviewBase')->process(['Preview' => $preview]);
 >
 >         // ... ommitted for brevity
 >     }

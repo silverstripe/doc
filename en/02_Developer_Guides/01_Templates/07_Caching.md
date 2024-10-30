@@ -8,8 +8,8 @@ icon: rocket
 
 ## Object caching
 
-All functions that provide data to templates must have no side effects, as the value is cached after first access. For
-example, this controller method will not behave as you might imagine.
+Any values accessed from a template on a `ModelData` object are cached after first access. Because of this, methods that provide data to templates should ideally have no side effects. For
+example, this `getCounter()` method will not behave as you might imagine when invoked from a template.
 
 ```php
 namespace App\Model;
@@ -33,8 +33,7 @@ class MyObject extends DataObject
 
 ```ss
 $Counter, $Counter, $Counter
-
-// returns 1, 1, 1
+// renders as 1, 1, 1
 ```
 
 When we render `$Counter` to the template we would expect the value to increase and output `1, 2, 3`. However, as
@@ -51,3 +50,9 @@ Example:
     $CacheableContent
 <% end_cached %>
 ```
+
+## Template caching
+
+Every time a raw template file is processed, some PHP code is generated from it which is then executed to produce the final rendered result.
+
+That PHP code is cached in the filesystem so that the raw template file doesn't need to be processed again until either the cache is flushed or the raw template file is updated.

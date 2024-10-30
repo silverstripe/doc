@@ -406,16 +406,16 @@ Manipulated images are stored as "file variants" in the same folder structure as
 
 ## Controlling how images are rendered
 
-Developers can customise how `Image` instances are rendered on their website by overriding the `templates/SilverStripe/Assets/Storage/DBFile_Image.ss` template file.
+Developers can customise how `Image` instances are rendered on their website by overriding the `templates/SilverStripe/Assets/Storage/DBFile_Image` template.
 
 This will apply to images added to an `HTMLEditorField` and images invoked in templates.
 
 You can also choose to have different rendering logic for `HTMLEditorField` images and for images invoked in templates by overriding different templates.
 
-- Add a `SilverStripe/Assets/Shortcodes/ImageShortcodeProvider_Image.ss` to your theme to control images added to an HTMLEditorField.
-- Add a `DBFile_Image.ss` file to the root of your theme to control only images invoked in templates.
+- Add a `SilverStripe/Assets/Shortcodes/ImageShortcodeProvider_Image` template to your theme to control images added to an `HTMLEditorField`.
+- Add a `DBFile_Image` template to the root of your theme to control only images invoked in templates.
 
-Look at [Template inheritance](../templates/Template_Inheritance) for more information on how to override SS templates.
+Look at [Template inheritance](../templates/Template_Inheritance) for more information on how to override templates.
 
 ## API documentation
 

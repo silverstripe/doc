@@ -254,8 +254,8 @@ We recommend configuring [shortcodes](/developer_guides/extending/shortcodes) th
 
 ### Escaping model properties
 
-[SSViewer](api:SilverStripe\View\SSViewer) (the Silverstripe CMS template engine) automatically takes care of escaping HTML tags from specific
-object-properties by [casting](/developer_guides/model/data_types_and_casting) its string value into a [DBField](api:SilverStripe\ORM\FieldType\DBField) object.
+Before outputting values to the template layer, [`ViewLayerData`](api:SilverStripe\View\ViewLayerData) automatically takes care of escaping HTML tags from specific
+object-properties by [casting](/developer_guides/model/data_types_and_casting) its string value into a [`DBField`](api:SilverStripe\ORM\FieldType\DBField) object.
 
 PHP:
 
@@ -285,7 +285,7 @@ Template:
 ```
 
 The example below assumes that data wasn't properly filtered when saving to the database, but are escaped before
-outputting through SSViewer.
+outputting rendered template results through `SSViewer`.
 
 ### Overriding default escaping in templates
 
@@ -307,7 +307,7 @@ Template (see above):
 ### Escaping custom attributes and getters
 
 Every object attribute or getter method used for template purposes should have its escape type defined through the
-static *$casting* array. Caution: Casting only applies when using values in a template, not in PHP.
+`casting` configuration property (assuming you're using a `ModelData` subclass). Caution: Casting only applies when using values in a template, not in PHP.
 
 PHP:
 

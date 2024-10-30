@@ -134,15 +134,15 @@ If you have the `cms` module installed, have a look at [`CMSMain::getEditForm()`
 example on how to extend the base functionality (e.g. by adding page versioning hints to the form).
 
 CMS templates are inherited based on their controllers, similar to subclasses of
-the common `Page` object (a new PHP class `MyPage` will look for a `MyPage.ss` template).
-We can use this to create a different base template with `LeftAndMain.ss`
+the common `Page` object (a new PHP class `MyPage` will look for a `MyPage` template).
+We can use this to create a different base template called `LeftAndMain`
 (which corresponds to the `LeftAndMain` PHP controller class).
 In case you want to retain the main CMS structure (which is recommended),
-just create your own "Content" template (e.g. `MyCMSController_Content.ss`),
+just create your own "Content" template (e.g. `MyCMSController_Content`),
 which is in charge of rendering the main content area apart from the CMS menu.
 
 Depending on the complexity of your layout, you'll also need to override the
-"EditForm" template (e.g. `MyCMSController_EditForm.ss`), e.g. to implement
+"EditForm" template (e.g. `MyCMSController_EditForm`), e.g. to implement
 a tabbed form which only scrolls the main tab areas, while keeping the buttons at the bottom of the frame.
 This requires manual assignment of the template to your form instance, see [`CMSMain::getEditForm()`](api:SilverStripe\CMS\Controllers\CMSMain::getEditForm()) for details.
 
@@ -152,7 +152,7 @@ In this case, you can either override the full base template as described above.
 To avoid duplicating all this template code, you can also use the special [`LeftAndMain::Tools()`](api:SilverStripe\Admin\LeftAndMain::Tools()) and
 [`LeftAndMain::EditFormTools()`](api:SilverStripe\Admin\LeftAndMain::EditFormTools()) methods available in `LeftAndMain`.
 These placeholders are populated by auto-detected templates,
-with the naming convention of `<controller classname>_Tools.ss` and `<controller classname>_EditFormTools.ss`.
+with the naming convention of `<controller classname>_Tools` and `<controller classname>_EditFormTools`.
 So to add or "subclass" a tools panel, simply create this file and it's automatically picked up.
 
 ## Layout and panels
@@ -176,7 +176,7 @@ For example, the "EditForm" has specific view and logic JavaScript behaviour
 which can be enabled via adding the "CMS-edit-form" class.
 In order to set the correct layout classes, we also need a custom template.
 To obey the inheritance chain, we use `$this->getTemplatesWithSuffix('_EditForm')` for
-selecting the most specific template (so `MyAdmin_EditForm.ss`, if it exists).
+selecting the most specific template (so a template named `MyAdmin_EditForm`, if it exists).
 
 The form should use a `LeftAndMainFormRequestHandler`, since it allows the use
 of a `PjaxResponseNegotiator` to handle its display.
@@ -690,7 +690,7 @@ content is occupied by the main content area. jQuery assumes a common
 parent in the DOM for both the tab navigation and its target DOM elements.
 In order to achieve this level of flexibility, most tabsets in the CMS
 use a custom template which leaves rendering the tab navigation to
-a separate template: `CMSMain.ss`. See the "Forms" section above
+a separate template named `CMSMain`. See the "Forms" section above
 for an example form.
 
 Here's how you would apply this template to your own tabsets used in the CMS.
@@ -725,7 +725,7 @@ Form template with custom tab navigation (trimmed down):
 </form>
 ```
 
-Tabset template without tab navigation (e.g. `CMSTabset.ss`)
+Tabset template without tab navigation (e.g. a template named `CMSTabset`)
 
 ```ss
 <div $AttributesHTML>

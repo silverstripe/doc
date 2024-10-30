@@ -94,7 +94,7 @@ Also see [Direct resource urls](#direct-resource-urls) below if you need to incl
 ## PHP requirements API
 
 It is common practice to include most Requirements either in the `init()` method of your [controller](../controllers/), or
-as close to rendering as possible (e.g. in [FormField](api:SilverStripe\Forms\FormField)).
+as close to rendering as possible (e.g. in [`FormField::Field()`](api:SilverStripe\Forms\FormField::Field())).
 
 ```php
 namespace App\Control;
@@ -451,7 +451,7 @@ If you want to get a resource for a *specific* theme or from somewhere that is n
 ```
 
 > [!TIP]
-> Notice the `vendor/module:some/path/to/file.jpg` syntax (used to get a resource from a specific module) is only valid for the `$resourceURL()` helper method. It won't work for `themedResourceURL()`.
+> Notice the `vendor/module:some/path/to/file.jpg` syntax (used to get a resource from a specific module) is only valid for the `$resourceURL()` helper method. It won't work for `$themedResourceURL()`.
 
 ### Resource URLs or filepaths from a PHP context
 

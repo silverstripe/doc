@@ -116,8 +116,8 @@ $email->send();
 ```
 
 > [!NOTE]
-> The default HTML template for emails is `vendor/silverstripe/framework/templates/SilverStripe/Control/Email/Email.ss`.
-> To customise this template, first copy it to `<project-root>/themes/<my-theme>/SilverStripe/Control/Email/Email.ss`. Alternatively, copy it to a different location and use `setHTMLTemplate` when you create the
+> The default HTML template for emails is `vendor/silverstripe/framework/templates/SilverStripe/Control/Email/Email`.
+> To customise this template, first copy it to a `<project-root>/themes/<my-theme>/SilverStripe/Control/Email/Email` template file. Alternatively, copy it to a different location and use `setHTMLTemplate` when you create the
 > `Email` instance. Note - by default the `$EmailContent` variable will escape HTML tags for security reasons. If you feel confident allowing this variable to be rendered as HTML, then update your custom email template to `$EmailContent.RAW`
 
 ### Templates

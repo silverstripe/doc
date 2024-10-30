@@ -165,7 +165,7 @@ which the Silverstripe CMS project applies to the modules it creates and maintai
 ### Coding guidelines
 
 - Complies to a well defined module directory structure and coding standards:
-  - `templates/` (for `.ss` templates)
+  - `templates/` (for templates e.g. `*.ss` files)
   - `src/` (for `.php` files)
   - `tests/` (for `*Test.php` test files), and;
   - `_config/` (for `.yml` config files)

@@ -103,21 +103,6 @@ to determine resolution priority. This search is based on the following three co
    the module author, and does not normally need to be customised. This includes the `$project` and
    `$other_modules` placeholder values.
 
-### ThemeResourceLoader
-
-The resolution of themes is performed by a [ThemeResourceLoader](api:SilverStripe\View\ThemeResourceLoader)
-instance, which resolves a template (or list of templates) and a set of themes to a system template path.
-
-For each path the loader will search in this order:
-
-- Loop through each theme which is configured.
-- If a theme is a set (declared with the `$` prefix, e.g. `$default`) it will perform a nested search within
-   that set.
-- When searching the `$default` set, all modules will be searched in the order declared via the `module_priority`
-   config, interpolating keys `$project` and `$other_modules` as necessary. By default, your project's templates should
-   be checked before any vendor modules.
-- When the first template is found, it will be immediately returned, and will not continue to search.
-
 ### Declaring themes
 
 All themes can be enabled and sorted via the `SilverStripe\View\SSViewer.themes` config value. For reference

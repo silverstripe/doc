@@ -457,10 +457,10 @@ see [Server Requirements: Secure Assets](/getting_started/server_requirements#se
 If the default server configuration is not appropriate for your specific environment, then you can
 further customise the `.htaccess` or `web.config` by editing one or more of the below:
 
-- `PublicAssetAdapter_HTAccess.ss`: Template for public permissions on the Apache server.
-- `PublicAssetAdapter_WebConfig.ss`: Template for public permissions on the IIS server.
-- `ProtectedAssetAdapter_HTAccess.ss`: Template for the protected store on the Apache server (should deny all requests).
-- `ProtectedAssetAdapter_WebConfig.ss`: Template for the protected store on the IIS server (should deny all requests).
+- `PublicAssetAdapter_HTAccess`: Template for public permissions on the Apache server.
+- `PublicAssetAdapter_WebConfig`: Template for public permissions on the IIS server.
+- `ProtectedAssetAdapter_HTAccess`: Template for the protected store on the Apache server (should deny all requests).
+- `ProtectedAssetAdapter_WebConfig`: Template for the protected store on the IIS server (should deny all requests).
 
 Each of these files will be regenerated on `?flush`, so it is important to ensure that these files are
 overridden at the template level, not via manually generated configuration files.
@@ -469,7 +469,7 @@ overridden at the template level, not via manually generated configuration files
 
 In order to ensure that public files are served correctly, you should check that your `assets/.htaccess`
 bypasses PHP requests for files that do exist. The default template
-(declared by `PublicAssetAdapter_HTAccess.ss`) has the following section, which may be customised in your project:
+(declared by the `PublicAssetAdapter_HTAccess` template) has the following section, which may be customised in your project:
 
 ```text
 # Non existent files passed to requesthandler

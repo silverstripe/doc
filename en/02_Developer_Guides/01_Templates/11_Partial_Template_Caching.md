@@ -49,9 +49,9 @@ different templates.
 
 Here is how it works in detail:
 
-1. `SilverStripe\View\SSViewer::$global_key` hash
+1. `SilverStripe\View\SSTemplateEngine.global_key` hash
 
-   With the current template context, value of the `$global_key` variable is rendered into a string and hashed.
+   With the current template context, value of the `$global_key` configuration property is rendered into a string and hashed.
 
    `$global_key` content is inserted into the template "as is" at the compilation stage. Changing its value
    won't have any effect until template recompilation (e.g. on cache flush).
@@ -64,7 +64,7 @@ Here is how it works in detail:
 
    ```yml
    # app/_config/view.yml
-   SilverStripe\View\SSViewer:
+   SilverStripe\View\SSTemplateEngine:
      global_key: '$CurrentReadingMode, $CurrentUser.ID, $CurrentLocale'
    ```
 
@@ -86,7 +86,7 @@ Here is how it works in detail:
 
    A string produced by concatenation of all the values mentioned above is used as the final value.
 
-   Even if `$CacheKey` is omitted, `SilverStripe\View\SSViewer::$global_key` and `Block hash` values are still
+   Even if `$CacheKey` is omitted, `SilverStripe\View\SSTemplateEngine.global_key` and `Block hash` values are still
    getting used to generate cache key for the caching backend storage.
 
 #### Cache key calculated in controller
@@ -340,7 +340,7 @@ The two following forms produce the same result
   <%--
        Hash of this content block is also included
        into the final Cache Key value along with
-       SilverStripe\View\SSViewer::$global_key
+       SilverStripe\View\SSTemplateEngine::$global_key
   --%>
   <% uncached %>
       This text is always dynamic (never cached)
