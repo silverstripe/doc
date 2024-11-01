@@ -60,7 +60,7 @@ to the React API. While optional, it is recommended to express components this w
 
 ### Recommended: react dev tools
 
-The [React Dev Tools](https://chrome.g.oogle.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) extension available for Chrome and Firefox is critical to debugging a React UI. It will let you browse the React UI much like the DOM, showing the tree of rendered components and their current props and state in real time.
+The React Dev Tools extension available for [Chrome](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi?hl=en) and [Firefox](https://addons.mozilla.org/en-GB/firefox/addon/react-devtools/) is critical to debugging a React UI. It will let you browse the React UI much like the DOM, showing the tree of rendered components and their current props and state in real time.
 
 ## Redux
 
