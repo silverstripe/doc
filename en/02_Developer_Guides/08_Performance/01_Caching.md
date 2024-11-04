@@ -293,7 +293,7 @@ SilverStripe\Core\Injector\Injector:
 
 Unfortunately not all caches are configurable via cache adapters.
 
-- [`SSTemplateEngine`](api:SilverStripe\View\SSTemplateEngine) writes compiled templates as PHP files to the filesystem
+- [`SSTemplateEngine`](api:SilverStripe\TemplateEngine\SSTemplateEngine) writes compiled templates as PHP files to the filesystem
    (in order to achieve opcode caching on `include()` calls)
 
 - [i18n](api:SilverStripe\i18n\i18n) uses `Symfony\Component\Config\ConfigCacheFactoryInterface` (filesystem-based)

@@ -369,7 +369,7 @@ Methods can also be chained.
 ### Position indicators
 
 Inside the loop scope, there are many variables at your disposal to determine the current position in the list and
-iteration. These are provided by [`SSViewer_BasicIteratorSupport::get_template_iterator_variables()`](api:SilverStripe\View\SSViewer_BasicIteratorSupport::get_template_iterator_variables()).
+iteration. These are provided by [`BasicIteratorSupport::get_template_iterator_variables()`](api:SilverStripe\TemplateEngine\BasicIteratorSupport::get_template_iterator_variables()).
 
 - `$Even`, `$Odd`: Returns boolean based on the current position in the list (see `$Pos` below). Handy for zebra striping.
 - `$EvenOdd`: Returns a string based on the current position in the list, either 'even' or 'odd'. Useful for CSS classes.
