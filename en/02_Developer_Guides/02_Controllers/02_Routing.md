@@ -201,7 +201,7 @@ start parsing variables and the appropriate controller action AFTER the `//`).
 ```yml
 SilverStripe\Control\Director:
   rules:
-    'admin/help//$Action/$ID: 'App\Control\AdminHelpController'
+    'admin/help//$Action/$ID': 'App\Control\AdminHelpController'
 ```
 
 ### Wildcard URL patterns
