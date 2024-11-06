@@ -7,7 +7,7 @@ icon: code
 # Rendering data to a template
 
 > [!NOTE]
-> The template syntax, file extensions, and specifics about which templates are chosen from a set as described on this page are specific to the default [`SSTemplateEngine`](api:SilverStripe\View\SSTemplateEngine) - but many of the concepts here (especially the PHP code) should work with any template engine you choose to use.
+> The template syntax, file extensions, and specifics about which templates are chosen from a set as described on this page are specific to the default [`SSTemplateEngine`](api:SilverStripe\TemplateEngine\SSTemplateEngine) - but many of the concepts here (especially the PHP code) should work with any template engine you choose to use.
 
 Templates do nothing on their own. Rather, they are used to generate markup - most typically they are used to generate HTML markup, using variables from some `ModelData` object.
 All of the `<% if %>`, `<% loop %>` and other variables are methods or parameters that are called on the current object in
@@ -53,7 +53,7 @@ If you want to render an arbitrary template into the `$Layout` section of a page
 These examples assume you have moved the `templates/Coach_Message.ss` template file to `templates/Layout/Coach_Message.ss`
 
 > [!WARNING]
-> While a lot of the concepts on this page apply for any template engine, the `$Layout` functionality is specific to the default [`SSTemplateEngine`](api:SilverStripe\View\SSTemplateEngine).
+> While a lot of the concepts on this page apply for any template engine, the `$Layout` functionality is specific to the default [`SSTemplateEngine`](api:SilverStripe\TemplateEngine\SSTemplateEngine).
 
 ```php
 namespace App\Model;
