@@ -39,15 +39,10 @@ Traditionally, validation in Silverstripe CMS has been mostly handled through [f
 
 Most validation constraints are actually data constraints which belong on the model. Silverstripe CMS provides the
 [`DataObject::validate()`](api:SilverStripe\ORM\DataObject::validate()) method for this purpose. The `validate()` method is
-called any time the `write()` method is called, before the `onBeforeWrite()` extension hook.
-
-By default, there is no validation - objects are always valid! However, you can override this method in your `DataObject`
+called any time the `write()` method is called. Implement this method in your `DataObject`
 sub-classes to specify custom validation, or use the `updateValidate()` extension hook through an [Extension](api:SilverStripe\Core\Extension).
 
 Invalid objects won't be able to be written - a [`ValidationException`](api:SilverStripe\Core\Validation\ValidationException) will be thrown and no write will occur.
-
-Ideally you should call `validate()` in your own application to test that an object is valid before attempting a
-write, and respond appropriately if it isn't.
 
 The return value of `validate()` is a [`ValidationResult`](api:SilverStripe\Core\Validation\ValidationResult) object.
 
@@ -81,6 +76,16 @@ class MyObject extends DataObject
     }
 }
 ```
+
+## DBField validation
+
+[`DBField`](api:SilverStripe\ORM\FieldType\DBField) is the base class for all database fields in Silverstripe CMS. For instance when you defined `'MyField' => 'Varchar(255)'` in your [`DataObject`](api:SilverStripe\ORM\DataObject) subclass, the `MyField` property would be an instance of [`DBVarchar`](api:SilverStripe\ORM\FieldType\DBVarchar).
+
+Most `DBField` subclasses will have their values validated as part of `DataObject::validate()`. This means that when a value is set on a `DBField` subclass, it will be validated against the constraints of that field. Field validation is called as part of `DataObject::validate()` which itself is called as part of [`DataObject::write()`](api:SilverStripe\ORM\DataObject::write()). If a value is invalid then a [`ValidationException`](api:SilverStripe\ORM\Validation\ValidationException) will be thrown.
+
+For example, if you have a `Varchar(64)`, and you try to set a value longer than 64 characters, a validation exception will be thrown.
+
+A full list of DBField subclasses and their validation rules can be found in [Data Types and Casting](data_types_and_casting).
 
 ## API documentation
 

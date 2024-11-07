@@ -31,33 +31,41 @@ class Player extends DataObject
 }
 ```
 
+Most `DBField` subclasses will be validated using a [`FieldValidator`](api:SilverStripe\Core\Validation\FieldValidation\FieldValidator) subclass which is call as part of the `DataObject::validate()` method. This means that when a value is set on a `DBField` subclass, it will be validated against the constraints of that field. If the value is invalid then a [`ValidationException`](api:SilverStripe\Core\Validation\ValidationException) will be thrown.
+
 ## Available types
 
-- `'BigInt'`: An 8-byte signed integer field (see: [DBBigInt](api:SilverStripe\ORM\FieldType\DBBigInt)).
-- `'Boolean'`: A boolean field (see: [DBBoolean](api:SilverStripe\ORM\FieldType\DBBoolean)).
-- `'Currency'`: A number with 2 decimal points of precision, designed to store currency values. Only supports single currencies (see: [DBCurrency](api:SilverStripe\ORM\FieldType\DBCurrency)).
-- `'Date'`: A date field (see: [DBDate](api:SilverStripe\ORM\FieldType\DBDate)).
-- `'Datetime'`: A date/time field (see: [DBDatetime](api:SilverStripe\ORM\FieldType\DBDatetime)).
-- `'DBClassName'`: A special enumeration for storing class names (see: [DBClassName](api:SilverStripe\ORM\FieldType\DBClassName)).
-- `'Decimal'`: A decimal number (see: [DBDecimal](api:SilverStripe\ORM\FieldType\DBDecimal)).
-- `'Double'`: A floating point number with double precision (see: [DBDouble](api:SilverStripe\ORM\FieldType\DBDouble)).
-- `'Enum'`: An enumeration of a set of strings that can store a single value (see: [DBEnum](api:SilverStripe\ORM\FieldType\DBEnum)).
-- `'Float'`: A floating point number (see: [DBFloat](api:SilverStripe\ORM\FieldType\DBFloat)).
-- `'Foreignkey'`: A special `Int` field used for foreign keys in `has_one` relationships (see: [DBForeignKey](api:SilverStripe\ORM\FieldType\DBForeignKey)).
-- `'HTMLFragment'`: A variable-length string of up to 2MB, designed to store HTML. Doesn't process [shortcodes](/developer_guides/extending/shortcodes/). (see: [DBHTMLText](api:SilverStripe\ORM\FieldType\DBHTMLText)).
-- `'HTMLText'`: A variable-length string of up to 2MB, designed to store HTML. Processes [shortcodes](/developer_guides/extending/shortcodes/). (see: [DBHTMLText](api:SilverStripe\ORM\FieldType\DBHTMLText)).
-- `'HTMLVarchar'`: A variable-length string of up to 255 characters, designed to store HTML. Can process [shortcodes](/developer_guides/extending/shortcodes/) with additional configuration. (see: [DBHTMLVarchar](api:SilverStripe\ORM\FieldType\DBHTMLVarchar)).
-- `'Int'`: A 32-bit signed integer field (see: [DBInt](api:SilverStripe\ORM\FieldType\DBInt)).
-- `'Locale'`: A field for storing locales (see: [DBLocale](api:SilverStripe\ORM\FieldType\DBLocale)).
-- `'Money'`: Similar to Currency, but with localisation support (see: [DBMoney](api:SilverStripe\ORM\FieldType\DBMoney)).
-- `'MultiEnum'`: An enumeration set of strings that can store multiple values (see: [DBMultiEnum](api:SilverStripe\ORM\FieldType\DBMultiEnum)).
-- `'Percentage'`: A decimal number between 0 and 1 that represents a percentage (see: [DBPercentage](api:SilverStripe\ORM\FieldType\DBPercentage)).
-- `'PolymorphicForeignKey'`: A special ForeignKey class that handles relations with arbitrary class types (see: [DBPolymorphicForeignKey](api:SilverStripe\ORM\FieldType\DBPolymorphicForeignKey)).
-- `'PrimaryKey'`: A special type Int field used for primary keys. (see: [DBPrimaryKey](api:SilverStripe\ORM\FieldType\DBPrimaryKey)).
-- `'Text'`: A variable-length string of up to 2MB, designed to store raw text (see: [DBText](api:SilverStripe\ORM\FieldType\DBText)).
-- `'Time'`: A time field (see: [DBTime](api:SilverStripe\ORM\FieldType\DBTime)).
-- `'Varchar'`: A variable-length string of up to 255 characters, designed to store raw text (see: [DBVarchar](api:SilverStripe\ORM\FieldType\DBVarchar)).
-- `'Year'`: Represents a single year field (see: [DBYear](api:SilverStripe\ORM\FieldType\DBYear)).
+| Field | API link | Description | Validation |
+| --- | --- | --- | --- |
+| `BigInt` | [`DBBigInt`](api:SilverStripe\ORM\FieldType\DBBigInt) | An 8-byte signed integer field | Must be an int between -9223372036854775808 and 9223372036854775807 |
+| `Boolean` | [`DBBoolean`](api:SilverStripe\ORM\FieldType\DBBoolean) | A boolean field stored as a tinyint | Must be a boolean |
+| `Currency` | [`DBCurrency`](api:SilverStripe\ORM\FieldType\DBCurrency) | A number with 2 decimal points of precision, designed to store currency values | Must be a decimal |
+| `Date` | [`DBDate`](api:SilverStripe\ORM\FieldType\DBDate) | A date field | Must be a valid date in `Y-m-d` format |
+| `Datetime` | [`DBDatetime`](api:SilverStripe\ORM\FieldType\DBDatetime) | A date/time field | Must be a valid datetime in `Y-m-d H:i:s` format |
+| `ClassName` | [`DBClassName`](api:SilverStripe\ORM\FieldType\DBClassName) | A special enumeration for storing class names | Must be a valid FQCN of a `DataObject` subclass |
+| `ClassNameVarchar` | [`DBClassNameVarchar`](api:SilverStripe\ORM\FieldType\DBClassNameVarchar) | A special enumeration for storing class names in a `Varchar` field | Must be a valid FQCN of a `DataObject` subclass |
+| `Decimal` | [`DBDecimal`](api:SilverStripe\ORM\FieldType\DBDecimal) | A decimal number | Must be a decimal. |
+| `Double` | [`DBDouble`](api:SilverStripe\ORM\FieldType\DBDouble) | A floating point number with double precision | Must be numeric |
+| `Email` | [`DBEmail`](api:SilverStripe\ORM\FieldType\DBEmail) | An email field | Must be a valid email address |
+| `Enum` | [`DBEnum`](api:SilverStripe\ORM\FieldType\DBEnum) | An enumeration of a set of strings that can store a single value | Must be one of the defined values |
+| `Float` | [`DBFloat`](api:SilverStripe\ORM\FieldType\DBFloat) | A floating point number | Must be numeric |
+| `ForeignKey` | [`DBForeignKey`](api:SilverStripe\ORM\FieldType\DBForeignKey) | A special `Int` field used for foreign keys in `has_one` relationships | Must be an int |
+| `HTMLFragment` | [`DBHTMLText`](api:SilverStripe\ORM\FieldType\DBHTMLText) | A variable-length string of up to 2MB, designed to store HTML. Doesn't process [shortcodes](/developer_guides/extending/shortcodes/) | Must be a string |
+| `HTMLText` | [`DBHTMLText`](api:SilverStripe\ORM\FieldType\DBHTMLText) | A variable-length string of up to 2MB, designed to store HTML. Processes [shortcodes](/developer_guides/extending/shortcodes/) | Must be a string |
+| `HTMLVarchar` | [`DBHTMLVarchar`](api:SilverStripe\ORM\FieldType\DBHTMLVarchar) | A variable-length string of up to 255 characters, designed to store HTML. Can process [shortcodes](/developer_guides/extending/shortcodes/) with additional configuration | String must not be longer than specified length |
+| `Int` | [`DBInt`](api:SilverStripe\ORM\FieldType\DBInt) | A 32-bit signed integer field | Must be an int between -2147483648 and 2147483647 |
+| `IP` | [`DBIp`](api:SilverStripe\ORM\FieldType\DBIp) | An IP field | Must be a valid IP address, either IPv4 or IPv6 |
+| `Locale` | [`DBLocale`](api:SilverStripe\ORM\FieldType\DBLocale) | A field for storing locales | Must be a valid locale |
+| `Money` | [`DBMoney`](api:SilverStripe\ORM\FieldType\DBMoney) | A localised money field with a 3 character currency component, and an amount component. | Currency string must not be greater than 3 characters, amount must be a decimal |
+| `MutliEnum` | [`DBMultiEnum`](api:SilverStripe\ORM\FieldType\DBMultiEnum) | An enumeration set of strings that can store multiple values | Must be one of the allowable values |
+| `Percentage` | [`DBPercentage`](api:SilverStripe\ORM\FieldType\DBPercentage) | A decimal number between 0 and 1 that represents a percentage | Must be a decimal between 0 and 1 |
+| `PolymorphicForeignKey` | [`DBPolymorphicForeignKey`](api:SilverStripe\ORM\FieldType\DBPolymorphicForeignKey) | A special ForeignKey class that handles relations with arbitrary class types | Must be an int |
+| `PrimaryKey` | [`DBPrimaryKey`](api:SilverStripe\ORM\FieldType\DBPrimaryKey) | A special type Int field used for primary keys | Must be an int |
+| `Text` | [`DBText`](api:SilverStripe\ORM\FieldType\DBText) | A variable-length string of up to 2MB, designed to store raw text | Must be a string |
+| `Time` | [`DBTime`](api:SilverStripe\ORM\FieldType\DBTime) | A time field | Must be a valid time in `H:i:s` format |
+| `URL` | [`DBUrl`](api:SilverStripe\ORM\FieldType\DBUrl) | A URL field | Must be a valid URL |
+| `Varchar` | [`DBVarchar`](api:SilverStripe\ORM\FieldType\DBVarchar) | A variable-length string of up to 255 characters, designed to store raw text | String must not be longer than specified length |
+| `Year` | [`DBYear`](api:SilverStripe\ORM\FieldType\DBYear) | Represents a single year field | Must be a valid year between 1901 and 2155 |
 
 See the [API documentation](api:SilverStripe\ORM\FieldType) for a full list of available data types. You can define your own [`DBField`](api:SilverStripe\ORM\FieldType\DBField) instances if required as well.
 
