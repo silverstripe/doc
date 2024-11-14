@@ -28,6 +28,8 @@ use SilverStripe\ORM\DataObject;
 
 class Player extends DataObject
 {
+    private static $class_description = 'Sports player';
+
     private static $table_name = 'Player';
 
     private static $db = [
