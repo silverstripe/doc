@@ -7,7 +7,7 @@ summary: Creating standardised JSON APIs for authenticated users in the CMS.
 
 This document contains a standard set of conventions to be used when creating JSON APIs in the CMS that are used in conjunction with AJAX requests from authenticated CMS users.
 
-To view an example of a controller that follows these standards see [`LinkFieldController`](https://github.com/silverstripe/silverstripe-linkfield/blob/4/src/Controllers/LinkFieldController.php).
+To view an example of a controller that follows these standards see [`LinkFieldController`](api:SilverStripe\LinkField\Controllers\LinkFieldController).
 
 ## Making the controller "REST-like" and its relation with `FormSchema`
 
@@ -34,14 +34,14 @@ Use the [`required_permission_codes`](api:SilverStripe\Admin\AdminController->re
 
 See [user permissions](/developer_guides/security/permissions/) for more information about declaring permissions.
 
-If you need form schema functionality, you will need to create a subclass of [`LeftAndMain`](api:SilverStripe\Admin\LeftAndMain) instead. All of the above still applies, but by default a menu item will be created for your new controller. To remove it from the CMS menu, set the [`ignore_menuitem`](api:SilverStripe\Admin\LeftAndMain->ignore_menuitem) configuration property to true for your class, i.e `private static $ignore_menuitem = true;`.
+If you need form schema functionality, you will need to create a subclass of [`FormSchemaController`](api:SilverStripe\Admin\FormSchemaController) instead.
 
 ## Handling requests with `$url_handlers`
 
 Utilise the [`url_handlers`](api:SilverStripe\Control\Controller->url_handlers) configuration property to get the following benefits:
 
 - Ensure the HTTP request method aligns with the intended use for each method, for instance, restricting it to GET or POST.
-- If subclassing `LeftAndMain`, avoid potential conflicts with existing methods on the superclass, such as [`LeftAndMain::sort()`](api:SilverStripe\Admin\LeftAndMain::sort()), by structuring the endpoint URL segment as `sort` and associating it with a method like `MySomethingController::apiSort()`.
+- If you're using form schema logic in a subclass of `LeftAndMain`, avoid potential conflicts with existing methods on the superclass, such as [`LeftAndMain::sort()`](api:SilverStripe\Admin\LeftAndMain::sort()), by structuring the endpoint URL segment as `sort` and associating it with a method like `MySomethingController::apiSort()`.
 
 Use the request param `$ItemID` if you need a record ID into a URL so that you have an endpoint for a specific record. Use `$ItemID` because it's consistent with the request param used in Form Schema requests. For example, to use `$ItemID` in a GET request to view a single record:
 
