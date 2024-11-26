@@ -18,7 +18,7 @@ which recursively collects all nodes based on various filtering criteria.
 The node strictly just has to implement the [Hierarchy](api:SilverStripe\ORM\Hierarchy\Hierarchy) extension,
 but in the CMS usually is a [SiteTree](api:SilverStripe\CMS\Model\SiteTree) object.
 
-## Add status lozenges to tree nodes
+## Add status flags to tree nodes
 
 A tree node in CMS could be rendered with lot of extra information but a node title, such as a
 link that wraps around the node title, a node's id which is given as id attribute of the node
@@ -50,53 +50,9 @@ code like this:
 By applying the proper style sheet, the snippet html above could produce the look of:
 ![Page Node Screenshot](../../../_images/tree_node.png "Page Node")
 
-SiteTree is a [DataObject](api:SilverStripe\ORM\DataObject) which is versioned by [Versioned](api:SilverStripe\Versioned\Versioned) extension.
-Each node can optionally have publication status flags, e.g. "Removed from draft".
-Each flag has a unique identifier, which is also used as a CSS class for easier styling.
+In the above screenshot "DELETED" is the status flag.
 
-Developers can easily add a new flag, delete or alter an existing flag on how it is looked
-or changing the flag label. The customization of these lozenges could be done either through
-inherited subclass or [Extension](api:SilverStripe\Core\Extension). It is just really about how we change the return
-value of function `SiteTree->getTreeTitle()` by two easily extendable methods
-`SiteTree->getStatusClass()` and `SiteTree->getStatusFlags()`.
-
-Note: Though the flag is not necessarily tie to its status of **publication** and it could
-be used for flagging anything you like, we should keep this lozenge to show version-related
-status, while let `SiteTree->CMSTreeClasses()` to deal with other customised classes, which
-will be used for the class attribute of &lt;li&gt; tag of the tree node.
-
-### Add new flag
-
-```php
-namespace {
-    use SilverStripe\CMS\Model\SiteTree;
-
-    class Page extends SiteTree
-    {
-        public function getScheduledToPublish()
-        {
-            // return either true or false
-        }
-
-        public function getStatusFlags($cached = true)
-        {
-            $flags = parent::getStatusFlags($cached);
-            $flags['scheduledtopublish'] = 'Scheduled To Publish';
-            return $flags;
-        }
-    }
-}
-```
-
-The above subclass of [SiteTree](api:SilverStripe\CMS\Model\SiteTree) will add a new flag for indicating its
-**'Scheduled To Publish'** status. The look of the page node will be changed
-from ![Normal Page Node](../../../_images/page_node_normal.png) to ![Scheduled Page Node](../../../_images/page_node_scheduled.png).
-
-The getStatusFlags has an `updateStatusFlags()`
-extension point, so the flags can be modified through `Extension` rather than
-inheritance as well.
-
-Deleting existing flags works by simply unsetting the array key.
+To learn how to add, remove, and update status flags see [status flags](/developer_guides/customising_the_admin_interface/status_flags/).
 
 ## Customising page icons
 
