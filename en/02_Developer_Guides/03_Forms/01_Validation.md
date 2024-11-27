@@ -71,71 +71,95 @@ In this example we will be required to input a value for `Name` and a valid emai
 
 > [!NOTE]
 > Each individual [FormField](api:SilverStripe\Forms\FormField) instance is responsible for validating the submitted content through the
-> [FormField::validate()](api:SilverStripe\Forms\FormField::validate()) method. By default, this just checks the value exists. Fields like `EmailField` override
-> `validate` to check for a specific format.
+> [FormField::validate()](api:SilverStripe\Forms\FormField::validate()) method. For example [`EmailField::validate()`](api:SilverStripe\Forms\EmailField::validate()) checks the field value is a valid email.
 
 ## Extensions
 
 Extensions applied to `FormField`, or subclasses, can hook into the validation logic and adjust the results by utilising
-the `updateValidationResult` method. For example, an extension applied to `EmailField` could look like this:
+the `updateValidate` method. For example, an extension applied to `EmailField` could look like this:
 
 ```php
 namespace App\Extension;
 
 use SilverStripe\Core\Extension;
-use SilverStripe\Forms\Validator;
+use SilverStripe\Core\Validation\ValidationResult;
 
 class FormFieldValidationExtension extends Extension
 {
-    protected function updateValidationResult(bool &$result, Validator $validator)
+    protected function updateValidate(ValidationResult $result): void
     {
         if (str_ends_with($this->owner->Value(), '@example.com')) {
-            $validator->validationError($this->owner->Name(), 'Please provide a valid email address');
-            $result = false;
+            $result->addFieldError(
+                $this->getOwner()->Name(),
+                'Please provide a valid email address which does not end with @example.com'
+            );
         }
     }
 }
 ```
 
-> [!WARNING]
-> This extension hook will not work without the ampersand (`&`) in the `&$result` argument. This is because the return
-> value of the function is ignored, so the validation result has to be updated by changing the value of the `$result`
-> variable. This is known as [passing by reference](https://www.php.net/manual/en/language.references.pass.php).
-
 ## Validation in `FormField` subclasses
 
-Subclasses of `FormField` can define their own version of `validate` to provide custom validation rules such as the
-above example with the `Email` validation. The `validate` method on `FormField` takes a single argument of the current
-`Validator` instance.
+Subclasses of `FormField` can define their own version of `validate()` to provide custom validation rules such as the
+above example with the `Email` validation.
 
 ```php
 namespace App\Form\Field;
 
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\Forms\NumericField;
 
 class CustomNumberField extends NumericField
 {
     // ...
 
-    public function validate($validator)
+    public function validate(): ValidationResult
     {
-        if ((int) $this->Value() === 10) {
-            $validator->validationError($this->Name(), 'This value cannot be 10');
-            return $this->extendValidationResult(false, $validator);
-        }
-
-        return $this->extendValidationResult(true, $validator);
+        $this->beforeExtending('updateValidate', function (ValidationResult $result) {
+            if ((int) $this->Value() === 20) {
+                $result->addFieldError($this->Name(), 'This value cannot be 20');
+            }
+        });
+        return parent::validate();
     }
 }
 ```
 
-The `validate` method should compute a boolean (`true` if the value passes validation and `false` if Silverstripe CMS
-should trigger a validation error on the page) and pass this to the `extendValidationResult` method to allow extensions
-to hook into the validation logic. In addition, in the event of failed validation, a useful error message must be set
-on the given validator.
+The `validate()` method returns a [`ValidationResult`](api:SilverStripe\Core\Validation\ValidationResult) object with any errors added to it, and should contain a useful error message. The `validate()` method should follow the example above and utilise the `$this->beforeExtending('updateValidate', ...)` method and be followed by `return parent::validate();` in order for code in the parent class to be executed in the correct order.
 
-> [!WARNING]
-> You can also override the entire `Form` validation by subclassing `Form` and defining a `validate` method on the form.
+## `FieldValidator` classes used for `FormField` validation
+
+Many of the built-in `FormField` classes use standardised [`FieldValidator`](api:SilverStripe\Core\Validation\FieldValidation\FieldValidator) to perform some or all of their validation. For example, the `EmailField` class uses the both the [`StringFieldValidator`](api:SilverStripe\Core\Validation\FieldValidation\StringFieldValidator) and the [`EmailFieldValidator`](api:SilverStripe\Core\Validation\FieldValidation\EmailFieldValidator) for validation.
+
+These are configured via the [`FormField.field_validators`](api:SilverStripe\Forms\FormField->field_validators) configuration, which you can configure on your own `FormField` subclasses.
+
+```php
+namespace App\Form\Field;
+
+use SilverStripe\Core\Validation\FieldValidation\EmailFieldValidator;
+use SilverStripe\Core\Validation\FieldValidation\OptionFieldValidator;
+use SilverStripe\Forms\EmailField;
+
+class CustomEmailField extends EmailField
+{
+    // ...
+
+    private static array $field_validators = [
+        // Disable the EmailFieldValidator defined in the parent EmailField by setting it to null
+        EmailFieldValidator::class => null,
+        // Add an OptionFieldValidator to validate the field value is in a list of allowable values
+        OptionFieldValidator::class => ['getAllowableEmails'],
+    ];
+
+    public function getAllowableEmails(): array
+    {
+        return [
+            'hello@example.com',
+            'welcome@example.com',
+        ];
+    }
+}
+```
 
 ## Form action validation
 
