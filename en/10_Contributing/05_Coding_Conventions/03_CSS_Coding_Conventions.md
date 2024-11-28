@@ -49,7 +49,7 @@ via `yarn lint` (see [Build Tooling](/contributing/build_tooling)).
   (e.g. Button, Accordion). Presentation of these components should not rely on
   the markup context they're embedded in.
 - The `client/src/containers` folder should contain use-case dependent styles only
-  (e.g. CampaignAdmin). Styles in here should be kept at a minimum.
+  (e.g. AssetAdmin). Styles in here should be kept at a minimum.
 - The file name of styles nested within components and containers should inherit their
   respective folder name for easy reference.
   For example, a `components/FormAction` component has styles named `FormAction.scss`).
