@@ -36,10 +36,6 @@ reviewing the release milestone on GitHub. Releases will be
 announced on the ["releases" forum category](https://forum.silverstripe.org/c/releases).
 Significant releases will also be published via the [`silverstripe.org` blog](https://silverstripe.org/blog).
 
-You can also keep track of new releases through the CMS UI
-by installing the [maintenance module](https://github.com/bringyourownideas/silverstripe-maintenance),
-or using the [composer outdated](https://getcomposer.org/doc/03-cli.md#outdated) command in your project.
-
 Additionally, you can [keep track of issues](issues_and_bugs#identifying-issues) (both open and closed)
 across all modules involved in a recipe release.
 

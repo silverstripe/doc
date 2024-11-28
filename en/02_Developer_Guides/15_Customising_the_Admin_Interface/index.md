@@ -11,7 +11,7 @@ The Admin interface is bundled within the Silverstripe CMS but is most commonly 
 module. The main class for displaying the interface is a specialized [Controller](api:SilverStripe\Control\Controller) called [LeftAndMain](api:SilverStripe\Admin\LeftAndMain), named
 as it is designed around a left hand navigation and a main edit form.
 
-The user interface logic has a combination of jQuery and [jQuery.entwine](./jquery_entwine/) with with [ReactJS](https://react.dev/). Some admin sections (`AssetAdmin` and `CampaignAdmin`) are powered purely with react components, while others have a combination of both react components and jQuery logic.
+The user interface logic has a combination of jQuery and [jQuery.entwine](./jquery_entwine/) with [ReactJS](https://react.dev/). Some admin sections, such as `AssetAdmin`, are powered purely with react components, while others have a combination of both react components and jQuery logic.
 
 [CHILDREN]
 

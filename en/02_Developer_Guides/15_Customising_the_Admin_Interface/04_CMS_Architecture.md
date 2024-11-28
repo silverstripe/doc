@@ -37,14 +37,13 @@ The easiest way to access the pattern library is to view it online. The pattern 
 
 If you're developing a new React component, running the pattern library locally is a good way to interact with it.
 
-The pattern library is built from the `silverstripe/admin` module, but it also requires `silverstripe/asset-admin`, `silversrtipe/cms` and `silverstripe/campaign-admin`.
+The pattern library is built from the `silverstripe/admin` module, but it also requires `silverstripe/asset-admin`, and `silverstripe/cms`.
 
 To run the pattern library locally, you'll need a Silverstripe CMS project based on `silverstripe/recipe-cms` and `yarn` installed locally. The pattern library requires the JS source files so you'll need to use the `--prefer-source` flag when installing your dependencies with Composer.
 
 ```bash
 composer install --prefer-source
 (cd vendor/silverstripe/asset-admin && yarn install)
-(cd vendor/silverstripe/campaign-admin && yarn install)
 (cd vendor/silverstripe/cms && yarn install)
 cd vendor/silverstripe/admin && yarn install && yarn pattern-lib
 ```

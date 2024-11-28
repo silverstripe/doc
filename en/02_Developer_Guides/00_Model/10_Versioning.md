@@ -89,16 +89,15 @@ Images and other files are tracked as versioned objects. If a file is referenced
 
 This behavior works both for versioned and unversioned objects.
 
-### Grouping versioned `DataObject` records into a `ChangeSet` (aka campaigns)
+### Grouping versioned `DataObject` records into a `ChangeSet`
 
 Sometimes, multiple pages or records may be related in organic ways that cannot be properly expressed through an ownership relation. There's still value in being able to publish those as a block.
 
 For example, your editors may be about to launch a new contest through their website. They've drafted a page to promote the contest, another page with the rules and conditions, a registration page for users to sign up, some promotional images, new sponsor records, etc. All this content needs to become visible simultaneously.
 
-Changes to many objects can be grouped together using the [`ChangeSet`](api:SilverStripe\Versioning\ChangeSet) object. In the CMS, editors can manage `ChangeSet`s through the "Campaign" section (if the `silverstripe/campaign-admin` module is installed). By grouping a series of content changes together as a cohesive unit, content editors can bulk publish an entire body of content all at once, which affords them much more power and control over interdependent content types.
+Changes to many objects can be grouped together using the [`ChangeSet`](api:SilverStripe\Versioning\ChangeSet) object. By grouping a series of content changes together as a cohesive unit. This can allow bulk publish an entire body of content all at once, which affords them much more power and control over interdependent content types. Note that there is currently no UI to enable this functionality, so it must be done programmatically.
 
-Records can be added to a changeset in the CMS by using the "Add to campaign" button
-that is available on the edit forms of all pages and files. Programmatically, this is done by creating a `ChangeSet` object and invoking its [`addObject(DataObject $record)`](api:SilverStripe\Versioning\ChangeSet::addObject()) method.
+Programmatically, this is done by creating a `ChangeSet` object and invoking its [`addObject(DataObject $record)`](api:SilverStripe\Versioning\ChangeSet::addObject()) method.
 
 > [!NOTE]
 > DataObjects can be added to more than one ChangeSet.
