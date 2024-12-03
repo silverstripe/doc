@@ -116,7 +116,7 @@ The Silverstripe CMS release cycle is built around these assumptions:
 
 At launch, a Silverstripe CMS major release supports all PHP versions in full support. PHP versions in limited support are not supported at launch by new Silverstripe CMS major releases.
 
-Following the initial launch of a Silverstripe CMS major release, the development team aims to add forward compatibility for the next PHP release. e.g: Silverstripe CMS 6 at launch will support PHP 8.3 and PHP 8.4. CMS 5 should receive official support for an eventual PHP 8.5 in early 2026.
+Following the initial launch of a Silverstripe CMS major release, the development team aims to add forward compatibility for the next PHP release. e.g: Silverstripe CMS 7 at launch will support PHP 8.5 and PHP 8.6. CMS 6 should receive official support for an eventual PHP 8.5 in early 2026.
 
 Support for end-of-life PHP releases is not dropped within a Silverstripe CMS major release line, unless it's necessary to address vulnerabilities or high impact bugs.
 

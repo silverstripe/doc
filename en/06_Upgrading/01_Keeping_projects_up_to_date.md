@@ -29,13 +29,13 @@ Assuming your project is using one of the [supported recipes](/getting_started/r
 
 To upgrade your code, open the root `composer.json` file. Find the lines that reference the recipes, like  `silverstripe/recipe-cms` and change the referenced versions to what has been reference in the changelog (as well as any other modules that have a new version).
 
-For example, assuming that you are currently on version `~5.0.0@stable`, if you wish to upgrade to 5.1.0 you will need to modify your `composer.json` file to explicitly specify the new release branch, here `~5.1.0`:
+For example, assuming that you are currently on version `~6.0.0@stable`, if you wish to upgrade to 6.1.0 you will need to modify your `composer.json` file to explicitly specify the new release branch, here `~6.1.0`:
 
 ```json
 {
     ...
     "require": {
-        "silverstripe/recipe-cms": "~5.1.0"
+        "silverstripe/recipe-cms": "~6.1.0"
     },
     ...
 }
@@ -45,7 +45,7 @@ You now need to pull in new dependencies and commit the lock file:
 
 ```bash
 composer update
-git commit composer.* -m "Upgrade to recipe 5.1.0"
+git commit composer.* -m "Upgrade to recipe 6.1.0"
 ```
 
 Push this commit to your remote repository, and continue with your deployment workflow.

@@ -3,13 +3,13 @@ title: Fixed dependencies
 description: Dependencies which will not be changed for the lifetime of a given major release
 ---
 
-# Silverstripe CMS 5 fixed dependencies
+# Silverstripe CMS 6 fixed dependencies
 
 Silverstripe CMS relies on third party packages. Silverstripe CMS projects may interact directly or indirectly with those dependencies.
 
-We've defined a list of *fixed dependencies* for the lifetime of Silverstripe CMS 5. These dependencies will not be upgraded to new major version within the Silverstripe CMS 5 release line.
+We've defined a list of *fixed dependencies* for the lifetime of Silverstripe CMS 6. These dependencies will not be upgraded to new major version within the Silverstripe CMS 6 release line.
 
-Dependencies not in this list may be changed or removed altogether within the lifetime of Silverstripe CMS 5.
+Dependencies not in this list may be changed or removed altogether within the lifetime of Silverstripe CMS 6.
 
 Dependency | Fixed major release line
 -- | --

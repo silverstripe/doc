@@ -277,7 +277,7 @@ table may be of use:
 | 5.2 +                    | 8.1 - 8.3   |
 | 5.0 - 5.1                | 8.1 - 8.2   |
 
-From Silverstripe CMS 5 onwards, the [Silverstripe CMS major release policy](/project_governance/major_release_policy#php-support-commitments) guides which PHP versions are supported by which Silverstripe CMS release.
+The [Silverstripe CMS major release policy](/project_governance/major_release_policy#php-support-commitments) guides which PHP versions are supported by which Silverstripe CMS release.
 
 ## CMS browser requirements
 

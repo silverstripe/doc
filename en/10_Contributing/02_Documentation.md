@@ -27,11 +27,11 @@ If you find a problem related to how the documentation is displayed which can't 
 ## Branches and commit messages
 
 - All documentation commits must follow the [commit message guidelines](./code#commit-messages), and must be prefixed with the `DOC` prefix.
-- If you are fixing incorrect or incomplete information, you should create a PR that targets the most recent patch release branch branch for the relevant major release line (e.g. `5.1`).
-- If you are adding documentation for functionality that has not yet been released, you should target the most recent minor release branch branch (e.g. `5`).
+- If you are fixing incorrect or incomplete information, you should create a PR that targets the most recent patch release branch branch for the relevant major release line (e.g. `6.1`).
+- If you are adding documentation for functionality that has not yet been released, you should target the most recent minor release branch branch (e.g. `6`).
 
 > [!WARNING]
-> You should make your changes in the lowest major branch they apply to. For instance, if you fix a spelling issue that you found in the CMS 4 documentation, submit your fix to the `4.13` branch in GitHub and it'll be copied to the most recent major version of the documentation automatically. *Don't submit multiple pull requests for the same change*.
+> You should make your changes in the lowest major branch they apply to. For instance, if you fix a spelling issue that you found in the CMS 5 documentation, submit your fix to the `5.4` branch in GitHub and it'll be copied to the most recent major version of the documentation automatically. *Don't submit multiple pull requests for the same change*.
 
 ## Editing online
 
