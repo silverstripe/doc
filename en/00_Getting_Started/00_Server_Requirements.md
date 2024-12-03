@@ -12,7 +12,7 @@ the server to update templates, website logic, and perform upgrades or maintenan
 
 ## PHP
 
-- PHP 8.3
+- PHP 8.3 - 8.4
 - PHP extensions: `ctype`, `dom`, `fileinfo`, `hash`, `intl`, `mbstring`, `session`, `simplexml`, `tokenizer`, `xml`
 - PHP configuration: `memory_limit` with at least `48M`
 - PHP extension for image manipulation: Either `gd` or `imagick`
@@ -273,7 +273,7 @@ table may be of use:
 
 | Silverstripe CMS Version | PHP Version |
 | ------------------------ | ----------- |
-| 6.0 +                    | 8.3         |
+| 6.0 +                    | 8.3 - 8.4   |
 | 5.2 +                    | 8.1 - 8.3   |
 | 5.0 - 5.1                | 8.1 - 8.2   |
 
