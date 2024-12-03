@@ -87,7 +87,7 @@ The current GitHub labels are grouped into five sections:
 1. *Impact* - What impact does this issue have, does it break a feature completely, is it just a side effect or is it trivial and not a big problem (but a bit annoying), etc. Impact is evaluated in the context of the CMS as a whole, rather than against the individual module the issue is raised on.
 1. *Complexity* - What level of technical proficiency is required to address this issue?
 1. *Type* - The type of solution required to address this issue
-1. *Affects* - The major release line this issue is relevant to - for instance `silverstripe/admin 2.0.0` is on the CMS 5 major release line, so use `affects/v5`. Do not add this label for unreleased major release lines, instead use `type/api-break`.
+1. *Affects* - The major release line this issue is relevant to - for instance `silverstripe/admin 3.0.0` is on the CMS 6 major release line, so use `affects/v6`. Do not add this label for unreleased major release lines, instead use `type/api-break`.
 1. *RFC* - The issue is a request-for-comment
 
 | Label | Purpose |

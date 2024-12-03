@@ -45,7 +45,7 @@ Refer to [Contributing Issues](./issues_and_bugs/) for more information about fi
 ## Step-by-step: how to contribute code {#step-by-step}
 
 > [!WARNING]
-> The examples below assume you are making a change that applies to the `5.1` branch.
+> The examples below assume you are making a change that applies to the `6.1` branch.
 >
 > Please adjust the commands as appropriate for the version of Silverstripe CMS that you're targeting. See [picking the right version](#picking-the-right-version).
 
@@ -63,8 +63,8 @@ The Silverstripe CMS project follows [Semantic Versioning](https://semver.org), 
 
 As we follow semantic versioning, we name the branches in repositories accordingly:
 
-- `<digits>` (e.g. `5`) branches contain all changes for upcoming major or minor releases. These are called "major release branches" or "minor release branches", depending on whether they represent the next major release or the next minor release.
-- `<digits>.<digits>` (e.g. `5.1`) branches contain all changes for upcoming patch releases. These are called "patch release branches".
+- `<digits>` (e.g. `6`) branches contain all changes for upcoming major or minor releases. These are called "major release branches" or "minor release branches", depending on whether they represent the next major release or the next minor release.
+- `<digits>.<digits>` (e.g. `6.1`) branches contain all changes for upcoming patch releases. These are called "patch release branches".
 
 If after reading this section you are still unsure what branch your pull request should go to, consider asking either in the GitHub issue that you address with your PR or in one of the various [community channels](https://www.silverstripe.org/community/).
 
@@ -81,19 +81,19 @@ If you are introducing new public API, introducing new features, or enhancing an
 
 If you are fixing a bug that doesn't require public API changes, use the highest patch release branch available for the lowest supported major release line the bug applies to. You can see the currently supported release lines for Silverstripe CMS on [the roadmap](https://www.silverstripe.org/software/roadmap/). You can find which major release lines of core and supported modules apply to that version by checking the relevant [supported modules](/project_governance/supported_modules/) page.
 
-For example, if your bug fix is applicable for Silverstripe CMS 4, and is for the `silverstripe/admin` module, you would target the `1.13` branch.
+For example, if your bug fix is applicable for Silverstripe CMS 5, and is for the `silverstripe/admin` module, you would target the `2.4` branch.
 
 #### For API breaking changes
 
 Do not make a pull request that includes a breaking change, including changing public API, unless there is a major release branch ready to merge into.
-For example if the latest stable release is `5.2.7`, the major release branch would be `6`.
+For example if the latest stable release is `6.2.7`, the major release branch would be `7`.
 
 ### Step 2: install the project {#install-the-project}
 
 Install the project through composer. The process is described in detail in the [getting started](../getting_started/composer#contributing) docs.
 
 ```bash
-composer create-project --keep-vcs silverstripe/installer ./your-website-folder 5.1.x-dev
+composer create-project --keep-vcs silverstripe/installer ./your-website-folder 6.1.x-dev
 ```
 
 Note that if you already have a working project and would like to implement the change in the context of that project, you will need to make sure you have the full source of the module using the [`composer reinstall`](https://getcomposer.org/doc/03-cli.md#reinstall) command:
@@ -120,13 +120,13 @@ composer reinstall <org>/<module> --prefer-source
     ```bash
     # make sure you're starting from the correct branch first
     cd vendor/<org>/<module>
-    git checkout --track origin/5.1
+    git checkout --track origin/6.1
     # then create your working branch
     git checkout -b <your-branch-name>
     ```
 
 > [!TIP]
-> Use a descriptive name for your branch. For example if you are fixing a bug related to swapping preview modes targetting the `5.1` branch: `pulls/5.1/fix-preview-modes`
+> Use a descriptive name for your branch. For example if you are fixing a bug related to swapping preview modes targetting the `6.1` branch: `pulls/6.1/fix-preview-modes`
 
 ### Step 4: work on your pull request {#work-on-your-pr}
 
@@ -226,10 +226,10 @@ If other changes are merged in before yours, your pull request may end up with m
 
 ```bash
 cd vendor/<org>/<module>
-git checkout 5.1
+git checkout 6.1
 git pull
 git checkout <your-branch-name>
-git rebase 5.1
+git rebase 6.1
 # if there are merge conflicts, resolve them at this stage then run git rebase --continue
 git push pr <your-branch-name> --force-with-lease
 ```

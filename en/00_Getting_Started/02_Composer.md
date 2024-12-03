@@ -54,10 +54,10 @@ This will get all the code that you need. As long as your web server and databas
 visit the site in your web browser and the installation process will be completed.
 
 You can also specify a constraint to download explicit versions or set boundary conditions for what versions Composer is allowed to install.
-For example, this will download the latest patch of the `4.13` release:
+For example, this will download the latest patch of the `6.0` release:
 
 ```bash
-composer create-project silverstripe/installer ./my-project ^4.13
+composer create-project silverstripe/installer ./my-project ^6.0
 ```
 
 Learn more about Composer constraints in [the official composer documentation](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints)
@@ -74,21 +74,21 @@ You can find thousands of Silverstripe CMS modules on [Packagist](https://packag
 Installing a module can be done with [the require command](https://getcomposer.org/doc/03-cli.md#require-r):
 
 ```bash
-composer require silverstripe/blog
+composer require dnadesign/silverstripe-elemental
 ```
 
-This will install the `silverstripe/blog` module in the latest compatible version. If you know the specific version you
-want to install already (such as `^2`), you can add it after the package name as
+This will install the `dnadesign/silverstripe-elemental` module in the latest compatible version. If you know the specific version you
+want to install already (such as `^6`), you can add it after the package name as
 a [version constraint](https://getcomposer.org/doc/articles/versions.md#writing-version-constraints):
 
 ```bash
-composer require silverstripe/blog ^2
+composer require dnadesign/silverstripe-elemental ^6
 ```
 
 > [!WARNING]
 > **Version constraints:** `master` or `main` is not a legal version string - it's a branch name. These are different things. The
 > version string that would get you the branch is `dev-main`. The version string that would get you a numeric branch is
-> a little different. The version string for the `5` branch is `5.x-dev`.
+> a little different. The version string for the `6` branch is `6.x-dev`.
 
 ## Updating dependencies
 
@@ -150,12 +150,12 @@ things in order to be able to do this:
 The first two steps are done as part of the initial create project using additional arguments.
 
 ```bash
-composer create-project --keep-vcs silverstripe/installer ./my-project 5.x-dev --prefer-source
+composer create-project --keep-vcs silverstripe/installer ./my-project 6.x-dev --prefer-source
 ```
 
 The process will take a bit longer, since all modules are checked out as full git repositories which you can work on.
-The command checks out from the 5.x release line. If you are providing a patch to fix a bug, replace `5.x-dev` with the
-latest minor branch instead, e.g. `5.1.x-dev` if the latest minor release was for CMS 5.1.
+The command checks out from the 6.x release line. If you are providing a patch to fix a bug, replace `6.x-dev` with the
+latest minor branch instead, e.g. `6.1.x-dev` if the latest minor release was for CMS 6.1.
 
 The `--keep-vcs` flag will make sure you have access to the git history of the installer and the requirements.
 
@@ -184,14 +184,14 @@ file. It will appear in your project root, and by default, it will look somethin
     "description": "The SilverStripe Framework Installer",
     "require": {
         "php": "^8.3",
-        "silverstripe/recipe-plugin": "^2",
-        "silverstripe/vendor-plugin": "^2",
-        "silverstripe/recipe-cms": "~5.0.0@stable",
-        "silverstripe-themes/simple": "~3.2.0",
-        "silverstripe/login-forms": "~5.0.0@stable"
+        "silverstripe/recipe-plugin": "~2.0.1@stable",
+        "silverstripe/vendor-plugin": "~2.0.3@stable",
+        "silverstripe/recipe-cms": "~6.0.0@stable",
+        "silverstripe-themes/simple": "~3.2.0@stable",
+        "silverstripe/login-forms": "~6.0.0@stable"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.5"
+        "phpunit/phpunit": "^11.3"
     },
     "extra": {
         "project-files-installed": [
@@ -249,13 +249,13 @@ This is a two step process. First you get Composer to start a project based on t
 silverstripe/installer
 
 ```bash
-composer create-project silverstripe/installer ./my-project 5.x-dev
+composer create-project silverstripe/installer ./my-project 6.x-dev
 ```
 
-Or for the latest development version in the 5.0.x minor release (i.e. if you're developing a bug fix)
+Or for the latest development version in the 6.0.x minor release (i.e. if you're developing a bug fix)
 
 ```bash
-composer create-project silverstripe/installer ./my-project 5.0.x-dev
+composer create-project silverstripe/installer ./my-project 6.0.x-dev
 ```
 
 ### Working with project forks and unreleased modules
@@ -325,12 +325,12 @@ the ["Repositories" chapter of the Composer documentation](https://getcomposer.o
 #### Forks and branch names
 
 For simplicity, you should keep using the same pattern of branch names as the main repositories does. If your version is a
-fork of 5.0, then call the branch `5.0`, not `5.0-myproj` or `myproj`. Otherwise, the dependency resolution gets
+fork of 6.0, then call the branch `6.0`, not `6.0-myproj` or `myproj`. Otherwise, the dependency resolution gets
 confused.
 
 Sometimes, however, this isn't feasible. For example, you might have a number of project forks stored in a single
 repository, such as your personal GitHub fork of a project. Or you might be testing/developing a feature branch. Or it
-might just be confusing to other team members to call the branch of your modified version `5.0`.
+might just be confusing to other team members to call the branch of your modified version `6.0`.
 
 In this case, you need to use Composer's aliasing feature to specify how you want the project branch to be treated, when
 it comes to dependency resolution.
@@ -341,15 +341,15 @@ Open `composer.json`, and find the module's `require`. Then put `as (core versio
 {
     "require": {
         "php": "^8.3",
-        "silverstripe/recipe-cms": "~5.0.0@stable",
-        "silverstripe/framework": "dev-myproj as 5.0.0",
+        "silverstripe/recipe-cms": "~6.0.0@stable",
+        "silverstripe/framework": "dev-myproj as 6.0.0",
         "silverstripe-themes/simple": "~3.2.0"
     }
 }
 ```
 
 What this means is that when the `myproj` branch is checked out into a project, this will satisfy any dependencies
-that `5.0.0` would meet. So, if another module has `"silverstripe/framework": "^5.0.0"` in its dependency list, it
+that `6.0.0` would meet. So, if another module has `"silverstripe/framework": "^6.0.0"` in its dependency list, it
 won't get a conflict.
 
 Both the version and the alias are specified as Composer versions, not branch names. For the relationship between

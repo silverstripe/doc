@@ -45,11 +45,11 @@ Silverstripe CMS follows [Semantic Versioning](https://semver.org).
 
 All Silverstripe CMS modules (including `silverstripe/framework`) may have patch releases created at any time, and will
 not necessarily match other core module patch release numbers. For example, your project may be using
-`silverstripe/cms` 5.3.1 with `silverstripe/versioned` 5.3.9.
+`silverstripe/cms` 6.3.1 with `silverstripe/versioned` 6.3.9.
 
-All Silverstripe CMS recipes are released in lock step with each other. For example, `silverstripe/installer` 5.3.1 will
-contain `silverstripe/recipe-cms` 5.3.1 and `silverstripe/recipe-core` 5.3.1. These recipes may contain various patch
-versions of its modules within the same minor release line (5.3 in this example).
+All Silverstripe CMS recipes are released in lock step with each other. For example, `silverstripe/installer` 6.3.1 will
+contain `silverstripe/recipe-cms` 6.3.1 and `silverstripe/recipe-core` 6.3.1. These recipes may contain various patch
+versions of its modules within the same minor release line (6.3 in this example).
 
 ## Regular minor releases
 

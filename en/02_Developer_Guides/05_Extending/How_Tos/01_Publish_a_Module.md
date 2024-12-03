@@ -37,8 +37,8 @@ For more information about what your `composer.json` file should include, consul
     "issues": "https://github.com/my-vendor/my-module/issues"
   },
   "require": {
-    "silverstripe/cms": "^5",
-    "silverstripe/framework": "^5"
+    "silverstripe/cms": "^6",
+    "silverstripe/framework": "^6"
   },
   "autoload": {
     "psr-4": {
@@ -77,19 +77,19 @@ By using Composer, this is made easy for developers by allowing them to specify 
 version of your module should be a separate branch in your version control and each branch should have a `composer.json`
 file explicitly defining what versions of Silverstripe CMS you support.
 
-Say you have a module which supports Silverstripe CMS 5.0. A new release of this module takes advantage of new features
-in Silverstripe CMS 5.1. In this case, you would create a new branch for the 5.0 compatible code base of your module. This
+Say you have a module which supports Silverstripe CMS 6.0. A new release of this module takes advantage of new features
+in Silverstripe CMS 6.1. In this case, you would create a new branch for the 6.0 compatible code base of your module. This
 allows you to continue fixing bugs on this older release branch.
 
 Other branches should be created on your module as needed if they're required to support specific Silverstripe CMS releases.
 
-You can have an overlap in supported versions, e.g two branches in your module both support Silverstripe CMS 5.0. In this
+You can have an overlap in supported versions, e.g two branches in your module both support Silverstripe CMS 6.0. In this
 case, you should explain the differences in your `README.md` file.
 
 Here's some common values for your `require` section
 (see [getcomposer.org](https://getcomposer.org/doc/01-basic-usage.md#package-versions) for details):
 
-- `5.0.*`: Version `5.0`, including `5.0.1`, `5.0.2` etc, excluding `5.1`
-- `~5.0`: Version `5.0` or higher, including `5.0.1` and `5.1` etc, excluding `6.0`
-- `~5.0,<5.2`: Version `5.0` or higher, up until `5.2`, which is excluded
-- `~5.0,>5.0.4`: Version `5.0` or higher, starting with `5.0.4`
+- `6.0.*`: Version `6.0`, including `6.0.1`, `6.0.2` etc, excluding `6.1`
+- `~6.0`: Version `6.0` or higher, including `6.0.1` and `6.1` etc, excluding `7.0`
+- `~6.0,<6.2`: Version `6.0` or higher, up until `6.2`, which is excluded
+- `~6.0,>6.0.4`: Version `6.0` or higher, starting with `6.0.4`

@@ -19,7 +19,7 @@ going to be removed and how they need to update their code.
 - Add a `@deprecated` item to the docblock tag, with the version when the code was deprecated and a message indicating what to use instead.
 - Update the deprecated code to throw a [Deprecation::notice()](api:SilverStripe\Dev\Deprecation::notice()) warning.
 - Both the docblock and error message should contain the **version** where the functionality is deprecated from.
-  So, if you're committing the change to a *4.12* minor release, the version will be *4.12.0*.
+  So, if you're committing the change to a *1.2* minor release, the version will be *1.2.0*.
 - Make sure that the old deprecated method works by calling the new function where possible - avoid duplicated code.
 - Deprecated APIs can be removed only after developers have had sufficient time to react to the changes. Hence, deprecated APIs should be removed in major releases only. Between major releases, leave the code in place with a deprecation warning.
 
@@ -28,21 +28,21 @@ going to be removed and how they need to update their code.
 
 When deprecating a method:
 
-- Add the following docblock `@deprecated 1.2.3 Use anotherMethod() instead`
-- `Deprecation::notice('1.2.3', 'Use anotherMethod() instead');` to the top of the method
+- Add the following docblock `@deprecated 1.2.0 Use anotherMethod() instead`
+- `Deprecation::notice('1.2.0', 'Use anotherMethod() instead');` to the top of the method
 - Wrap `Deprecation::notice()` with `Deprecation::withSuppressedNotice()` if there's no replacement for that deprecated method and it's not feasible to wrap all calls to the method
 
 When deprecating a class:
 
-- Add the following docblock `@deprecated 1.2.3 Use AnotherClass instead`
-- Add `Deprecation::notice('1.2.3', 'Use AnotherClass instead', Deprecation::SCOPE_CLASS);` to the top of `__construct()`
+- Add the following docblock `@deprecated 1.2.0 Use AnotherClass instead`
+- Add `Deprecation::notice('1.2.0', 'Use AnotherClass instead', Deprecation::SCOPE_CLASS);` to the top of `__construct()`
 - Wrap `Deprecation::notice()` with `Deprecation::withSuppressedNotice()` if there's no replacement for that deprecated class and it's not feasible to wrap all instantiations of the class
 
     ```php
     namespace App;
 
     /**
-     * @deprecated 4.12.0 Will be removed without equivalent functionality
+     * @deprecated 1.2.0 Will be removed without equivalent functionality
      */
     class MyDeprecatedClass extends AnotherClass
     {
@@ -50,7 +50,7 @@ When deprecating a class:
         {
             Deprecation::withSuppressedNotice(function () {
                 Deprecation::notice(
-                    '4.12.0',
+                    '1.2.0',
                     'Will be removed without equivalent functionality',
                     Deprecation::SCOPE_CLASS
                 );
@@ -62,11 +62,11 @@ When deprecating a class:
 
 When deprecating config:
 
-- Add the following docblock `@deprecated 1.2.3 Use different_config instead`
+- Add the following docblock `@deprecated 1.2.0 Use different_config instead`
 
 When deprecating some behaviour, combination of configuration values, parameters, etc:
 
-- Add `Deprecation::notice('1.2.3', 'Using x with y is deprecated. Do [other thing] instead', Deprecation::SCOPE_GLOBAL);`
+- Add `Deprecation::notice('1.2.0', 'Using x with y is deprecated. Do [other thing] instead', Deprecation::SCOPE_GLOBAL);`
 - It may not be immediately clear where this type of deprecation warning should go. In that case, add it to the `HTTPApplication::warnAboutDeprecatedSetups()` method.
 - It may be appropriate to link to some documentation in the message for this type of deprecation warning.
 
@@ -123,18 +123,18 @@ class Director
 
     /**
      * Returns true if your are in development mode
-     * @deprecated 4.12.0 Use SilverStripe\Core\Env::is_dev() instead.
+     * @deprecated 1.2.0 Use SilverStripe\Core\Env::is_dev() instead.
      */
     public function isDev()
     {
-        Deprecation::notice('4.12.0', 'Use SilverStripe\Core\Env::is_dev() instead');
+        Deprecation::notice('1.2.0', 'Use SilverStripe\Core\Env::is_dev() instead');
         return Env::is_dev();
     }
 }
 ```
 
-This change could be committed to a minor release like *4.12.0*, and remains deprecated in all subsequent minor releases
-(e.g. *4.13.0*), until a new major release (e.g. *5.0.0*), at which point it gets removed from the codebase.
+This change could be committed to a minor release like *1.2.0*, and remains deprecated in all subsequent minor releases
+(e.g. *1.3.0*), until a new major release (e.g. *2.0.0*), at which point it gets removed from the codebase.
 
 ## Enabling deprecation warnings
 

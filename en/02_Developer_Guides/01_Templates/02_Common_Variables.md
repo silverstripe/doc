@@ -115,18 +115,18 @@ on a per-page basis.
 > [!WARNING]
 > If you don’t want to include the title tag use `$MetaTags(false)`.
 
-By default `$MetaTags` renders (assuming 5.1.0 is the current version of `silverstripe/framework`):
+By default `$MetaTags` renders (assuming 6.0.0 is the current version of `silverstripe/framework`):
 
 ```html
 <title>Title of the Page</title>
-<meta name="generator" content="Silverstripe CMS 5.1">
+<meta name="generator" content="Silverstripe CMS 6.0">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 ```
 
 `$MetaTags(false)` will render
 
 ```html
-<meta name="generator" content="Silverstripe CMS 5.1">
+<meta name="generator" content="Silverstripe CMS 6.0">
 <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
 ```
 

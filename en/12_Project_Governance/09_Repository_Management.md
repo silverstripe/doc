@@ -12,9 +12,9 @@ This document outlines the rules and processes for managing the GitHub repositor
 
 ### Naming convention
 
-Branches with a single integer (e.g. `5`) represent either the next *major* release (if there have been no tagged releases for that release line yet) or the next *minor* release.
+Branches with a single integer (e.g. `1`) represent either the next *major* release (if there have been no tagged releases for that release line yet) or the next *minor* release.
 
-Branches with an integer, a dot, and another integer (e.g. `5.2`) represent either the *next patch release* for the current minor, or a patch release for a previous minor version.
+Branches with an integer, a dot, and another integer (e.g. `1.2`) represent either the *next patch release* for the current minor, or a patch release for a previous minor version.
 
 > [!NOTE]
 > Branches with any other naming strategy should not be the target of any pull requests. Only branches following this naming convention are included in merge-ups and are used as the base for new tagged releases.
@@ -22,16 +22,16 @@ Branches with an integer, a dot, and another integer (e.g. `5.2`) represent eith
 For example, if we have the following tags:
 
 ```text
-5.1.17
-5.2.0
+1.1.17
+1.2.0
 ```
 
 Then:
 
-- `5.1` is the patch release branch for the previous minor version. High severity security fixes should target this branch.
-- `5.2` is the next-patch release branch for the current minor version. Bugfixes should target this branch.
-- `5` is the next-minor release branch. Enhancements should target this branch.
-- `6` is the next-major release branch. Changes that break backwards compatibility should target this branch.
+- `1.1` is the patch release branch for the previous minor version. High severity security fixes should target this branch.
+- `1.2` is the next-patch release branch for the current minor version. Bugfixes should target this branch.
+- `1` is the next-minor release branch. Enhancements should target this branch.
+- `2` is the next-major release branch. Changes that break backwards compatibility should target this branch.
 
 ### Branch protection
 
