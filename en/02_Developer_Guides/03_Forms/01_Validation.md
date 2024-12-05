@@ -394,6 +394,39 @@ class MyPage extends Page
 > You can also update the `CompositeValidator` by creating an `Extension` and implementing the
 > `updateCMSCompositeValidator()` method.
 
+### `RequiredFields` and whitespace
+
+By default, `RequiredFields` will consider a field with only whitespace as a valid value. You an change this behavior with the [`allow_whitespace_only`](api:SilverStripe\Forms\RequiredFields->allow_whitespace_only) global configuration, or on a per-instance basis using [`setAllowWhitespaceOnly()`](api:SilverStripe\Forms\RequiredFields::setAllowWhitespaceOnly()).
+
+```yml
+# global configuration
+SilverStripe\Forms\RequiredFields:
+  allow_whitespace_only: false
+```
+
+```php
+namespace App\PageType;
+
+use Page;
+use SilverStripe\Forms\CompositeValidator;
+use SilverStripe\Forms\RequiredFields;
+
+class MyPage extends Page
+{
+    // ...
+
+    public function getCMSCompositeValidator(): CompositeValidator
+    {
+        $validator = parent::getCMSCompositeValidator();
+        $requiredFields = RequiredFields::create(['MyRequiredField']);
+        // per instance configuration, will override global configuration
+        $requiredFields->setAllowWhitespaceOnly(false);
+        $validator->addValidator($requiredFields);
+        return $validator;
+    }
+}
+```
+
 ## Related lessons
 
 - [Introduction to frontend forms](https://www.silverstripe.org/learn/lessons/v4/introduction-to-frontend-forms-1)
