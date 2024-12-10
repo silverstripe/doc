@@ -69,8 +69,8 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class MyController extends Controller
 {
@@ -99,7 +99,7 @@ class MyController extends Controller
             FieldList::create([
                 FormAction::create('doSubmitForm', 'Submit'),
             ]),
-            RequiredFields::create([
+            RequiredFieldsValidator::create([
                 'Name',
                 'Teams',
                 'ID',
@@ -149,8 +149,8 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class MyController extends Controller
 {
@@ -177,7 +177,7 @@ class MyController extends Controller
             FieldList::create([
                 FormAction::create('doSubmitForm', 'Submit'),
             ]),
-            RequiredFields::create([
+            RequiredFieldsValidator::create([
                 'Name',
                 'HometownTeam.Name',
                 'ID',
@@ -232,8 +232,8 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HiddenField;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class MyController extends Controller
 {
@@ -262,7 +262,7 @@ class MyController extends Controller
             FieldList::create([
                 FormAction::create('doSubmitForm', 'Submit'),
             ]),
-            RequiredFields::create([
+            RequiredFieldsValidator::create([
                 'Name',
                 'MyTeams[]',
                 'ID',
