@@ -40,8 +40,8 @@ use PageController;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
-use SilverStripe\Forms\RequiredFields;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class MyFormPageController extends PageController
 {
@@ -63,7 +63,7 @@ class MyFormPageController extends PageController
             FormAction::create('doSayHello')->setTitle('Say hello')
         );
 
-        $required = RequiredFields::create('Name');
+        $required = RequiredFieldsValidator::create('Name');
 
         $form = Form::create($this, 'HelloForm', $fields, $actions, $required);
 
@@ -403,7 +403,7 @@ See [how_tos/handle_nested_data](How to: Handle nested form data) for more advan
 
 ## Validation
 
-Form validation is handled by the [Validator](api:SilverStripe\Forms\Validator) class and the `validator` property on the `Form` object. The validator
+Form validation is handled by the [Validator](api:SilverStripe\Forms\Validation\Validator) class and the `validator` property on the `Form` object. The validator
 is provided with a name of each of the [FormField](api:SilverStripe\Forms\FormField)s to validate and each `FormField` instance is responsible for
 validating its' own data value.
 
@@ -414,7 +414,7 @@ namespace App\PageType;
 
 use PageController;
 use SilverStripe\Forms\Form;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class MyFormPageController extends PageController
 {
@@ -424,7 +424,7 @@ class MyFormPageController extends PageController
     {
         // ...
 
-        $validator = RequiredFields::create([
+        $validator = RequiredFieldsValidator::create([
             'Name',
             'Email',
         ]);
