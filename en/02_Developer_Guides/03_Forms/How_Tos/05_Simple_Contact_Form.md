@@ -151,14 +151,14 @@ The final thing we do is return a 'thank you for your feedback' message to the u
 
 All forms have some basic validation built in – email fields will only let the user enter email addresses, number fields will only accept numbers, and so on. Sometimes you need more complicated validation, so you can define your own validation by extending the Validator class.
 
-The framework comes with a predefined validator called [RequiredFields](api:SilverStripe\Forms\RequiredFields), which performs the common task of making sure particular fields are filled out. Below is the code to add validation to a contact form:
+The framework comes with a predefined validator called [`RequiredFieldsValidator`](api:SilverStripe\Forms\Validation\RequiredFieldsValidator), which performs the common task of making sure particular fields are filled out. Below is the code to add validation to a contact form:
 
 ```php
 namespace App\PageType;
 
 use PageController;
 use SilverStripe\Forms\Form;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class ContactPageController extends PageController
 {
@@ -167,10 +167,10 @@ class ContactPageController extends PageController
     public function getForm()
     {
         // ...
-        $validator = RequiredFields::create('Name', 'Message');
+        $validator = RequiredFieldsValidator::create('Name', 'Message');
         return Form::create($this, 'Form', $fields, $actions, $validator);
     }
 }
 ```
 
-We've created a RequiredFields object, passing the name of the fields we want to be required. The validator we have created is then passed as the fifth argument of the form constructor. If we now try to submit the form without filling out the required fields, JavaScript validation will kick in, and the user will be presented with a message about the missing fields. If the user has JavaScript disabled, PHP validation will kick in when the form is submitted, and the user will be redirected back to the Form with messages about their missing fields.
+We've created a RequiredFieldsValidator object, passing the name of the fields we want to be required. The validator we have created is then passed as the fifth argument of the form constructor. If we now try to submit the form without filling out the required fields, JavaScript validation will kick in, and the user will be presented with a message about the missing fields. If the user has JavaScript disabled, PHP validation will kick in when the form is submitted, and the user will be redirected back to the Form with messages about their missing fields.

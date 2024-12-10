@@ -24,7 +24,7 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class SearchPageController extends PageController
 {
@@ -57,7 +57,7 @@ class SearchPageController extends PageController
             FormAction::create('doSearchForm', 'Search')
         );
 
-        $required = RequiredFields::create([
+        $required = RequiredFieldsValidator::create([
             'Type',
         ]);
 
@@ -92,7 +92,7 @@ use SilverStripe\Forms\FormAction;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\NumericField;
 use SilverStripe\Forms\OptionsetField;
-use SilverStripe\Forms\RequiredFields;
+use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class SearchForm extends Form
 {
@@ -127,7 +127,7 @@ class SearchForm extends Form
             FormAction::create('doSearchForm', 'Search')
         );
 
-        $required = RequiredFields::create([
+        $required = RequiredFieldsValidator::create([
             'Type',
         ]);
 
