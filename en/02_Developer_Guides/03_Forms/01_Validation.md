@@ -10,9 +10,10 @@ icon: check-square
 > Before you start implementing custom validation logic, check out [validation using `symfony/validator` constraints](/developer_guides/model/validation/#validation-and-constraints)
 > and see if there's an existing constraint that can do the heavy lifting for you.
 
-Silverstripe CMS provides server-side form validation out of the box through the [Validator](api:SilverStripe\Forms\Validation\Validator) abstract class and its' child classes
-(see [available validators](#available-validators) below). A single `Validator` instance is set on each `Form`. Validators are implemented as an argument to
-the [Form](api:SilverStripe\Forms\Form) constructor or through the function `setValidator`.
+Silverstripe CMS provides server-side form validation out of the box in a couple of ways:
+
+- Firstly, when a [`Form`](api:SilverStripe\Forms\Form) is submitted, the [`FormField::validate()`](api:SilverStripe\Forms\FormField::validate()) method is called on each [FormField](api:SilverStripe\Forms\FormField) instance within the form.
+- Secondly, an instance of [Validator](api:SilverStripe\Forms\Validation\Validator) sublass can be set on each `Form`. Validators are implemented as an argument to the [Form](api:SilverStripe\Forms\Form) constructor or through the function `setValidator`.
 
 ```php
 namespace App\PageType;
@@ -38,6 +39,7 @@ class MyFormPageController extends PageController
     {
         $fields = FieldList::create(
             TextField::create('Name'),
+            // EmailField::validate() will validate the submitted value is a valid email address
             EmailField::create('Email')
         );
 
@@ -45,7 +47,7 @@ class MyFormPageController extends PageController
             FormAction::create('doSubmitForm', 'Submit')
         );
 
-        // the fields 'Name' and 'Email' are required.
+        // RequiredFieldsValidator marks the fields 'Name' and 'Email' as required.
         $required = RequiredFieldsValidator::create([
             'Name', 'Email',
         ]);
@@ -265,8 +267,6 @@ The Silverstripe framework comes with the following built-in validators:
 - [`CompositeValidator`](api:SilverStripe\Forms\Validation\CompositeValidator)
   A container for additional validators. You can implement discrete validation logic in multiple `Validator` subclasses and apply them *all* to a
   given form by putting them inside a `CompositeValidator`. The `CompositeValidator` doesn't have perform any validation by itself.
-- [`FieldsValidator`](api:SilverStripe\Forms\FieldsValidator)
-  Simply calls [`validate()`](api:SilverStripe\Forms\FormField::validate()) on all data fields in the form, to ensure fields have valid values.
 - [`RequiredFieldsValidator`](api:SilverStripe\Forms\Validation\RequiredFieldsValidator)
   Validates that fields you declare as "required" have a value.
 
