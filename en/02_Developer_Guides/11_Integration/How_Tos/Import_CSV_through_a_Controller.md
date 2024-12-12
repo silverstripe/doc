@@ -17,7 +17,6 @@ use App\Model\MyDataObject;
 use SilverStripe\Control\Controller;
 use SilverStripe\Dev\CsvBulkLoader;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\FieldsValidator;
 use SilverStripe\Forms\FileField;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\FormAction;
@@ -46,8 +45,7 @@ class MyController extends Controller
             ),
             FieldList::create(
                 FormAction::create('doUpload', 'Upload')
-            ),
-            FieldsValidator::create()
+            )
         );
         return $form;
     }
