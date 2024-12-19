@@ -434,7 +434,7 @@ SilverStripe\Forms\Validation\RequiredFieldsValidator:
 namespace App\PageType;
 
 use Page;
-use SilverStripe\Forms\CompositeValidator;
+use SilverStripe\Forms\Validation\CompositeValidator;
 use SilverStripe\Forms\Validation\RequiredFieldsValidator;
 
 class MyPage extends Page
