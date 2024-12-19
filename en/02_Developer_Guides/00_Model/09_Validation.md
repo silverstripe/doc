@@ -49,6 +49,7 @@ The return value of `validate()` is a [`ValidationResult`](api:SilverStripe\Core
 ```php
 namespace App\Model;
 
+use SilverStripe\Core\Validation\ValidationResult;
 use SilverStripe\ORM\DataObject;
 
 class MyObject extends DataObject
@@ -58,7 +59,7 @@ class MyObject extends DataObject
         'Postcode' => 'Varchar',
     ];
 
-    public function validate()
+    public function validate(): ValidationResult
     {
         $result = parent::validate();
 
