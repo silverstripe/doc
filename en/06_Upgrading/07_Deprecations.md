@@ -53,7 +53,7 @@ By default, deprecation warnings will be emitted to the error logger, and will b
 
 ### Viewing deprecation warnings in the logs
 
-Deprecation warnings are output to the same error logger as all other warnings and errors. You will need to make sure you have a logging handler attached to the default `Psr\Log\LoggerInterface` or `Psr\Log\LoggerInterface.errorhandler` singletons. For example, to log to a file you can add this to your YAML configuration:
+Deprecation warnings are output to the same error logger as all other warnings and errors. You will need to make sure you have a logging handler attached to the default `Psr\Log\LoggerInterface` singleton. For example, to log to a file you can add this to your YAML configuration:
 
 ```yml
 SilverStripe\Core\Injector\Injector:
@@ -62,7 +62,7 @@ SilverStripe\Core\Injector\Injector:
     constructor:
       - "/var/www/silverstripe.log"
       - "warning" # warning is the level deprecation warnings are logged as
-  Psr\Log\LoggerInterface.errorhandler:
+  Psr\Log\LoggerInterface:
     calls:
       ErrorLogFileHandler: [ pushHandler, [ '%$ErrorLogFileHandler' ] ]
 ```

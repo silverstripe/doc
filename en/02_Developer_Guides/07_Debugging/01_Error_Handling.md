@@ -6,7 +6,7 @@ icon: exclamation-circle
 
 # Logging and error handling
 
-Silverstripe CMS uses Monolog for both error handling and logging. It comes with two default configurations: one for
+Silverstripe CMS uses Monolog for both error handling (for PHP errors and uncaught exceptions) and logging. It comes with two default configurations: one for
 logging, and another for core error handling. The core error handling implementation also comes with two default
 configurations: one for development environments, and another for test or live environments. On development
 environments, Silverstripe CMS will deal harshly with any warnings or errors: a full call-stack is shown and execution
@@ -196,7 +196,15 @@ SilverStripe\Core\Injector\Injector:
 
 The `info` argument provides the minimum level to start logging at.
 
-### Disabling the default handler
+### Modifying the default error handler
+
+The default error handler catches uncaught exceptions and PHP errors and displays them in the browser and terminal.
+
+> [!WARNING]
+> In general you should not attach your own error handler to the `Psr\Log\LoggerInterface.errorhandler` error handler service.
+> Attaching a your handler to the `Psr\Log\LoggerInterface` service will allow you to handle unchaught exceptions, PHP errors, and manually logged error messages, and is therefore preferred.
+
+#### Disabling the default error handler
 
 You can disable a handler by removing its pushHandlers call from the calls option of the Logger service definition.
 The handler key of the default handler is `pushDisplayErrorHandler`, so you can disable it like this:
@@ -208,7 +216,7 @@ SilverStripe\Core\Injector\Injector:
       pushDisplayErrorHandler: '%%remove%%'
 ```
 
-### Setting a different configuration for dev
+#### Setting a different configuration for dev
 
 In order to set different logging configuration on different environment types, we rely on the environment-specific
 configuration features that the config system providers. For example, here we have different configuration for dev and
