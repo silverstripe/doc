@@ -43,7 +43,7 @@ Core Module | Supported major release line
 [silverstripe/session-manager](https://packagist.org/packages/silverstripe/session-manager) | 3
 [silverstripe/siteconfig](https://packagist.org/packages/silverstripe/siteconfig) | 6
 [silverstripe/template-engine](https://packagist.org/packages/silverstripe/template-engine) | 1
-[silverstripe/vendor-plugin](https://packagist.org/packages/silverstripe/vendor-plugin) | 2
+[silverstripe/vendor-plugin](https://packagist.org/packages/silverstripe/vendor-plugin) | 3
 [silverstripe/versioned](https://packagist.org/packages/silverstripe/versioned) | 3
 [silverstripe/versioned-admin](https://packagist.org/packages/silverstripe/versioned-admin) | 3
 

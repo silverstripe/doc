@@ -185,7 +185,7 @@ file. It will appear in your project root, and by default, it will look somethin
     "require": {
         "php": "^8.3",
         "silverstripe/recipe-plugin": "~2.0.1@stable",
-        "silverstripe/vendor-plugin": "~2.0.3@stable",
+        "silverstripe/vendor-plugin": "~3.0.0@stable",
         "silverstripe/recipe-cms": "~6.0.0@stable",
         "silverstripe-themes/simple": "~3.2.0@stable",
         "silverstripe/login-forms": "~6.0.0@stable"
