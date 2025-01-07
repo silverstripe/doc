@@ -35,12 +35,10 @@ If a core or supported module is not listed on Transifex, usually that means it 
 If you find a core or supported module which has strings that can be (or should be able to be) translated, please
 [raise an issue on GitHub](./issues_and_bugs) for that module.
 
-### How do I translate substituted strings? (Such as `%s` or `{my-variable}`)
+### How do I translate substituted strings? (Such as `{my-variable}`)
 
-You don't have to - if the english string reads 'Hello %s', your german translation would be 'Hallo %s'. Strings
-prefixed by a percentage-sign are automatically replaced by Silverstripe CMS with dynamic content. See
-<https://php.net/sprintf> for details. The newer `{my-variable}` format works the same way, but makes its intent clearer,
-and allows reordering of placeholders in your translation.
+You don't have to - if the english string reads 'Hello {my-variable}', your german translation would be 'Hallo {my-variable}'. Strings
+included in `{}` are automatically replaced by Silverstripe CMS with dynamic content.
 
 ### Do I need to convert special characters (such as HTML entities)?
 
