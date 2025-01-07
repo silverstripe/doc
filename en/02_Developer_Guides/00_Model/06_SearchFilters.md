@@ -41,24 +41,17 @@ $players = Player::get()->filterAny([
 
 Developers can define their own [SearchFilter](api:SilverStripe\ORM\Filters\SearchFilter) if needing to extend the ORM filter and exclude behaviors.
 
-## Modifiers
+## Modifiers and case sensitivity {#modifiers}
 
 `SearchFilter`s can also take modifiers. The modifiers currently supported are `":not"`, `":nocase"`, and
 `":case"` (though you can implement custom modifiers on your own `SearchFilter` implementations). These negate the filter, make it case-insensitive and make it case-sensitive, respectively.
 
 > [!NOTE]
-> The default comparison uses the database's default case sensitivity. For MySQL and MSSQL, this is case-insensitive. For PostgreSQL, this is case-sensitive. But you can declare the default
+> The default comparison uses the database's default case sensitivity (even for `ArrayList`). For MySQL and MSSQL, this is case-insensitive. For PostgreSQL, this is case-sensitive. But you can declare the default
 > case sensitivity for your project by setting the `default_case_sensitive` configuration property on `SearchFilter` like so:
 >
 > ```yml
 > SilverStripe\ORM\Filters\SearchFilter:
->   default_case_sensitive: false
-> ```
->
-> Though note that for backwards compatibility reasons, `ArrayList` is explicitly case sensitive by default. To change that, you must set `ArrayList.default_case_sensitive` to false.
->
-> ```yml
-> SilverStripe\Model\List\ArrayList:
 >   default_case_sensitive: false
 > ```
 
