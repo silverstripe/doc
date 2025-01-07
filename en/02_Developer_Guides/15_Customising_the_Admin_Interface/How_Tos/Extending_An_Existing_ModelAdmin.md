@@ -30,5 +30,4 @@ MyAdmin:
     - App\Extension\MyAdminExtension
 ```
 
-The following extension points are available: `updateEditForm()`, `updateSearchContext()`,
-`updateSearchForm()`, `updateList()`, `updateImportForm`.
+The following extension points are available: `updateEditForm()`, `updateList()`, `updateImportForm`.
