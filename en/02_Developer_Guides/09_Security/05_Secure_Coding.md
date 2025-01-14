@@ -215,8 +215,7 @@ displaying a blog post in HTML from a trusted author, or escaping a search param
 redisplaying it).
 
 > [!WARNING]
-> Note: Silverstripe CMS templates do not remove tags, please use [strip_tags()](https://php.net/strip_tags) for this purpose
-> or [sanitize](https://htmlpurifier.org/) it correctly.
+> Note: Make sure you use the [correct casting](/developer_guides/model/data_types_and_casting/#casting) when including content in a Silverstripe CMS template.
 
 See the [OWASP article on XSS](https://owasp.org/www-community/attacks/xss/) for more information.
 
@@ -225,6 +224,8 @@ See the [OWASP article on XSS](https://owasp.org/www-community/attacks/xss/) for
 For `HTMLText` database fields which aren't edited through `HtmlEditorField`, you also
 have the option to explicitly whitelist allowed tags in the field definition, e.g. `"MyField" => "HTMLText('meta','link')"`.
 The `SiteTree.ExtraMeta` property uses this to limit allowed input.
+
+You can also use the [`XssSanitiser`](api:SilverStripe\Core\XssSanitiser) to remove some known XSS attack vectors from HTML content. Note that this should be used only in scenarios where the HTML content can't be completely removed, and should not be considered a complete protection against all XSS attack vectors but rather as simply one of many tools in your security tool box.
 
 ### What if I need to allow script or style tags?
 
