@@ -299,7 +299,7 @@ SilverStripe\Core\Injector\Injector:
       - proxy: '111.222.333.444:55'
 ```
 
-## Limiting oembed URLs
+### Limiting oembed URLs
 
 HTMLEditorField can have whitelists set on both the scheme (default HTTP & HTTPS) and domains allowed when
 inserting files for use with oembed.
@@ -335,7 +335,29 @@ of the above values.
 By default live sites (see [environment types](/developer_guides/debugging/environment_types/)) will not attempt to resolve oembed urls that
 point to localhost to protect your site from cross site request forgery.
 
-### Doctypes
+### Sandboxing oembed HTML
+
+In order to prevent any malicious oembed providers from injecting XSS payloads into the current webpage, HTML content that is returned is sandboxed in an `iframe` tag.
+
+With the [`EmbedShortcodeProvider.domains_excluded_from_sandboxing`](api:SilverStripe\View\Shortcodes\EmbedShortcodeProvider->domains_excluded_from_sandboxing) configuration property, you can explicitly declare domains which should be excluded from sandboxing if you find it is interfering with embeds from specific domains. For example if a YouTube embed was not rendering correctly as a result of the sandboxing you could use this YAML configuration:
+
+```yml
+SilverStripe\View\Shortcodes\EmbedShortcodeProvider:
+  domains_excluded_from_sandboxing:
+    - 'youtube.com'
+```
+
+Do not include the protocol (i.e. don't include `https://` or `http://`).
+
+You can also change the attributes of the iframe itself with the [`EmbedShortcodeProvider.sandboxed_iframe_attributes`](api:SilverStripe\View\Shortcodes\EmbedShortcodeProvider->sandboxed_iframe_attributes) configuration property:
+
+```yml
+SilverStripe\View\Shortcodes\EmbedShortcodeProvider:
+  sandboxed_iframe_attributes:
+    allow: 'fullscreen'
+```
+
+## Doctypes
 
 Since TinyMCE generates markup, it needs to know which doctype your documents will be rendered in. You can set this
 through the [element_format](https://www.tiny.cloud/docs/tinymce/6/content-filtering/#element_format) configuration variable.
