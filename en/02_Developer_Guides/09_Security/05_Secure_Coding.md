@@ -144,7 +144,7 @@ class MyForm extends Form
 }
 ```
 
-- `FormField->Value()`
+- `FormField->getValue()`
 - URLParams passed to a Controller-method
 
 Example:
