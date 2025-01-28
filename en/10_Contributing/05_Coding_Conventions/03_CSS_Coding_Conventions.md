@@ -17,14 +17,14 @@ Check our [requirements](/getting_started/server_requirements) documentation.
 ## Tools and libraries
 
 Styles are written in the [SCSS language](https://sass-lang.com/).
-We use [Bootstrap 4](https://getbootstrap.com/) styles where possible.
+We use [Bootstrap 5](https://getbootstrap.com/) styles where possible.
 
 ## Conventions
 
 We follow the [AirBnB CSS Conventions](https://github.com/airbnb/css)
 and the [BEM](https://getbem.com/) methodology (block-element-modifier).
 
-Because we use [Bootstrap 4](https://getbootstrap.com/) which
+Because we use [Bootstrap 5](https://getbootstrap.com/) which
 does not follow [BEM](https://getbem.com/) naming convention there will be
 a lot of places where class names voilate BEM.
 However, please note that they are not a indicator of how to name classes.
