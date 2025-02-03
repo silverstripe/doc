@@ -67,7 +67,7 @@ use SilverStripe\View\Requirements;
 Requirements::javascript('app/client/dist/bundle.js');
 
 // When referencing theme files, use a path relative to the root of your project
-Requirements::javascript('themes/simple/javascript/script.js');
+Requirements::javascript('themes/my-theme/javascript/script.js');
 
 // When referencing files from a module, you need to prefix the path with the module name.
 Requirements::javascript('silverstripe/admin:client/dist/js/bundle.js');
@@ -446,8 +446,8 @@ If you want to get a resource for a *specific* theme or from somewhere that is n
 ```ss
 <img src="$resourceURL('app/images/my-image.jpg')">
 <img src="$resourceURL('my/module:images/my-image.jpg')">
-<img src="$resourceURL('themes/simple/images/my-image.jpg')">
-<img src="$resourceURL('themes/simple/images')/$Image.jpg">
+<img src="$resourceURL('themes/my-theme/images/my-image.jpg')">
+<img src="$resourceURL('themes/my-theme/images')/$Image.jpg">
 ```
 
 > [!TIP]

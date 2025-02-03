@@ -56,7 +56,7 @@ Supported PHP Module | Supported versions
 [colymba/gridfield-bulk-editing-tools](https://packagist.org/packages/colymba/gridfield-bulk-editing-tools) | 5
 [dnadesign/silverstripe-elemental](https://packagist.org/packages/dnadesign/silverstripe-elemental) | 6
 [dnadesign/silverstripe-elemental-userforms](https://packagist.org/packages/dnadesign/silverstripe-elemental-userforms) | 5
-[silverstripe-themes/simple](https://packagist.org/packages/silverstripe-themes/simple) | 3
+[silverstripe/startup-theme](https://packagist.org/packages/silverstripe/startup-theme) | 1
 [silverstripe/dynamodb](https://packagist.org/packages/silverstripe/dynamodb) | 6
 [silverstripe/gridfieldqueuedexport](https://packagist.org/packages/silverstripe/gridfieldqueuedexport) | 4
 [silverstripe/hybridsessions](https://packagist.org/packages/silverstripe/hybridsessions) | 4
