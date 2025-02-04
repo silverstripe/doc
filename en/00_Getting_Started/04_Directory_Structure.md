@@ -58,7 +58,7 @@ Silverstripe core modules.
 
 | Directory                       | Description                                                     |
 | ------------------              | ---------------------------                                     |
-| `themes/simple/`                | Standard "simple" theme                                         |
+| `themes/startup-theme/`         | Default theme                                                   |
 | `themes/<yourtheme>/`           | Custom theme base directory                                     |
 | `themes/<yourtheme>/templates`  | Theme templates                                                 |
 | `themes/<yourtheme>/css`        | Theme CSS files                                                 |
