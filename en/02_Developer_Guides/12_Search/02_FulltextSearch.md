@@ -10,11 +10,6 @@ Fulltext search allows advanced search criteria for searching words within a tex
 Fulltext search can be achieved using the built-in [MySQLDatabase](api:SilverStripe\ORM\Connect\MySQLDatabase) class a more powerful wrapper for Fulltext
 search is provided through a module.
 
-> [!WARNING]
-> See the [FulltextSearch Module](https://github.com/silverstripe-labs/silverstripe-fulltextsearch/). This module provides
-> a high level wrapper for running advanced search services such as Solr, Lucene or Sphinx in the backend rather than
-> `MySQL` search.
-
 ## Adding fulltext support to `MySQLDatabase`
 
 The [MySQLDatabase](api:SilverStripe\ORM\Connect\MySQLDatabase) class defaults to creating tables using the InnoDB storage engine. As Fulltext search in MySQL

@@ -354,10 +354,10 @@ class MyAdmin extends ModelAdmin
 > <head></head>
 > <%-- body tag is needed for javascript to be injected --%>
 > <body>
->     <%-- these two divs are just here to comply with styling from the simple theme, replace them with your own theme markup --%>
->     <div class="main"><div class="inner typography line">
+>     <%-- these HTML elements are just here to comply with styling from the default theme, replace them with your own theme markup --%>
+>     <main class="container container--page"><div class="page"><div class="page__content>
 >         $Preview
->     </div></div>
+>     </div></div></main>
 > </body>
 > </html>
 > ```
