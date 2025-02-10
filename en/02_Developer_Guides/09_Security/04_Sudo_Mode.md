@@ -6,9 +6,28 @@ icon: key
 
 # Sudo mode
 
-Sudo mode represents a heightened level of permission in that you are more certain that the current user is actually the person whose account is logged in. This is performed by re-validating that the account's password is correct, and will then last for a certain amount of time (configurable) until it will be checked again.
+Sudo mode represents a heightened level of permission in that you are more certain that the current CMS user is actually the person whose account is logged in. This is performed by re-validating that the account's password is correct, and will then last for a certain amount of time (configurable) until it will be checked again.
 
-Sudo mode will automatically be enabled for the configured lifetime when a user logs into the CMS. Note that if the PHP session lifetime expires before the sudo mode lifetime, that sudo mode will also be cleared (and re-enabled when the user logs in again). If the user leaves their CMS open, or continues to use it, for an extended period of time with automatic refreshing in the background, sudo mode will eventually deactivate once the max lifetime is reached.
+Sudo mode is not active when a user logs in to the CMS. If the PHP session lifetime expires before the sudo mode lifetime, that sudo mode will also be cleared. If the user leaves their CMS open, or continues to use it, for an extended period of time with automatic refreshing in the background, sudo mode will eventually deactivate once the max lifetime is reached.
+
+Data protected by sudo mode is still viewable without entering the password, but any actions that modify data will require the user to enter their password. This is done to balance usability with security. The following [`DataObject`](api:SilverStripe\ORM\DataObject) subclasses are protected by sudo mode:
+
+- [`Member`](api:SilverStripe\Security\Member)
+- [`Group`](api:SilverStripe\Security\Group)
+- [`PermissionRole`](api:SilverStripe\Security\PermissionRole)
+- [`PermissionRoleCode`](api:SilverStripe\Security\PermissionRoleCode)
+- [`SiteConfig`](api:SilverStripe\SiteConfig\SiteConfig)
+
+## Adding or removing sudo mode for a `DataObject`
+
+To add sudo mode for a particular `DataObject`, simply set the [`DataObject.require_sudo_mode`](api:SilverStripe\ORM\DataObject->require_sudo_mode) configuration property to `true`, either via yml or directly on the class.
+
+While it's not recommended, to remove sudo mode for a particular `DataObject`, set the [`DataObject.require_sudo_mode`](api:SilverStripe\ORM\DataObject->require_sudo_mode) configuration property to `false` via yml.
+
+```yml
+SilverStripe\Security\Member:
+  require_sudo_mode: false
+```
 
 ## Configuring the lifetime
 
@@ -19,31 +38,15 @@ SilverStripe\Security\SudoMode\SudoModeService:
   lifetime_minutes: 25
 ```
 
-## Enabling sudo mode for controllers
+## Enabling sudo mode for controller endpoints
 
-You can add the `SudoModeServiceInterface` singleton as a dependency to a controller that requires sudo mode for one of its actions:
-
-```php
-namespace App\Control;
-
-class MyController extends Controller
-{
-    private ?SudoModeServiceInterface $sudoModeService = null;
-
-    private static array $dependencies = ['SudoModeService' => '%$' . SudoModeServiceInterface::class];
-
-    public function setSudoModeService(SudoModeServiceInterface $sudoModeService): static
-    {
-        $this->sudoModeService = $sudoModeService;
-        return $this;
-    }
-}
-```
-
-Performing a sudo mode verification check in a controller action is simply using the service to validate the request:
+Performing a sudo mode verification check in a controller endpoint by using the sudo mode service to validate the request:
 
 ```php
 namespace App\Control;
+
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Security\SudoMode\SudoModeServiceInterface;
 
 class MyController extends Controller
 {
@@ -51,7 +54,8 @@ class MyController extends Controller
 
     public function myAction(HTTPRequest $request): HTTPResponse
     {
-        if (!$this->sudoModeService->check($request->getSession())) {
+        $service = Injector::inst()->get(SudoModeServiceInterface::class);
+        if (!$service->check($request->getSession())) {
             return $this->httpError(403, 'Sudo mode is required for this action');
         }
         // ... continue with sensitive operations
