@@ -44,6 +44,9 @@ sub-classes to specify custom validation, or use the `updateValidate()` extensio
 
 Invalid objects won't be able to be written - a [`ValidationException`](api:SilverStripe\Core\Validation\ValidationException) will be thrown and no write will occur.
 
+If appropriate, you can call [`ValidationResult::setModelClass()`](api:SilverStripe\Core\Validation\ValidationResult::setModelClass())
+and [`ValidationResult::setRecordID()`](api:SilverStripe\Core\Validation\ValidationResult::setRecordID()) on your `ValidationResult` instance to set the class and ID of the object being validated. This additional info will show in the validation error messages in a CLI context, as well as in a non-CLI context if the current controller is an instance or a subclass of a controller configured in the [`ValidationException.show_additional_info_non_cli_controllers`](api:SilverStripe\Core\Validation\ValidationException->show_additional_info_non_cli_controllers) configuration.
+
 The return value of `validate()` is a [`ValidationResult`](api:SilverStripe\Core\Validation\ValidationResult) object.
 
 ```php
