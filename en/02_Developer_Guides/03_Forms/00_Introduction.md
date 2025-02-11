@@ -388,7 +388,7 @@ class MyFormPageController extends PageController
         echo $data['Email'];
 
         // You can also fetch the value from the field.
-        echo $form->Fields()->dataFieldByName('Email')->Value();
+        echo $form->Fields()->dataFieldByName('Email')->getValue();
 
         // Using the Form instance you can get / set status such as error messages.
         $form->sessionMessage('Successful!', 'good');
