@@ -90,7 +90,7 @@ class FormFieldValidationExtension extends Extension
 {
     protected function updateValidate(ValidationResult $result): void
     {
-        if (str_ends_with($this->owner->Value(), '@example.com')) {
+        if (str_ends_with($this->owner->getValue(), '@example.com')) {
             $result->addFieldError(
                 $this->getOwner()->Name(),
                 'Please provide a valid email address which does not end with @example.com'
@@ -118,7 +118,7 @@ class CustomNumberField extends NumericField
     public function validate(): ValidationResult
     {
         $this->beforeExtending('updateValidate', function (ValidationResult $result) {
-            if ((int) $this->Value() === 20) {
+            if ((int) $this->getValue() === 20) {
                 $result->addFieldError($this->Name(), 'This value cannot be 20');
             }
         });
