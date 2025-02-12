@@ -33,6 +33,7 @@ Core Module | Supported major release line
 [silverstripe/errorpage](https://packagist.org/packages/silverstripe/errorpage) | 3
 [silverstripe/framework](https://packagist.org/packages/silverstripe/framework) | 6
 [silverstripe/graphql](https://packagist.org/packages/silverstripe/graphql) | 6
+[silverstripe/htmleditor-tinymce](https://packagist.org/packages/silverstripe/htmleditor-tinymce) | 1
 [silverstripe/installer](https://packagist.org/packages/silverstripe/installer) | 6
 [silverstripe/login-forms](https://packagist.org/packages/silverstripe/login-forms) | 6
 [silverstripe/mimevalidator](https://packagist.org/packages/silverstripe/mimevalidator) | 4
