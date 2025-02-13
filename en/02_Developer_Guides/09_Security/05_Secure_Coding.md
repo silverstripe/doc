@@ -660,45 +660,106 @@ This is a recommended option to secure any controller which displays
 or submits sensitive user input, and is enabled by default in all CMS controllers,
 as well as the login form.
 
-## Request hostname forgery {#request-hostname-forgery}
+## Request hostname forgery and host header injection attacks {#request-hostname-forgery}
 
-To prevent a forged hostname appearing being used by the application, Silverstripe CMS
-allows the configure of a whitelist of hosts that are allowed to access the system. By defining
-this whitelist in your `.env` file, any request presenting a `Host` header that is
-*not* in this list will be blocked with a HTTP 400 error:
+Ideally your hosting will reject invalid host headers. For example Apache allows you to define valid hosts as part of the virtual host configuration, and a Web Application Firewall (WAF) can also be configured to validate the host header. However if your hosting is set to allow *any* host header, your project might be vulnerable to host header injection attacks.
+
+To prevent a forged hostname being used by your application, Silverstripe CMS
+allows the configuration of an allow list of valid hosts that are allowed in the `Host` header. This is an extra layer of protection against this type of attack.
+By defining this allow list, any request presenting a `Host` header that is *not* in this list will be blocked with a HTTP 400 error.
+
+While you should have appropriate validation at a hosting level, it is best practice to also configure this in your project.
+
+> [!NOTE]
+> If this configuration is not set, a warning will be logged.
+> If you have implemented adequate protections in your hosting already and have legitimate reasons to not set this configuration,
+> you can explicitly set it to `"*"`. That will disable logging and declare that your project should explicitly allow any host
+> header without validating it.
+
+The main way to configure this is using the `SS_ALLOWED_HOSTS` environment variable:
 
 ```bash
-SS_ALLOWED_HOSTS="www.example.com,example.com,subdomain.example.com"
+SS_ALLOWED_HOSTS="example.com,www.example.com,subdomain.example.com"
 ```
 
-Please note that if this configuration is defined, you *must* include *all* subdomains (eg `<www>.`)
-that will be accessing the site.
+You can also configure the allow list with YAML configuration, which can be useful if you don't have full control over your hosting:
+
+```yml
+---
+after: requestprocessors
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Control\Middleware\AllowedHostsMiddleware:
+    properties:
+      AllowedHosts:
+        - 'example.com'
+        - 'www.example.com'
+        - 'subdomain.example.com'
+```
+
+> [!WARNING]
+> Please note that you *must* include *all* subdomains (eg `www.`) that will be serving out content from the project using the same codebase.
+> For example if your CMS serves content on the following hosts, *all* of them must be added to the allow list:
+>
+> - `example.com` (primary domain)
+> - `www.example.com` (www subdomain)
+> - `blog.example.com` (subdomain for a blog)
+> - `example.org` (secondary domain serving the same content)
+
+Note that domains which only *redirect* to your project (i.e. with a `301` HTTP response) should not be added as allowed hosts.
+
+### Reverse proxies and forwarded hosts
 
 When Silverstripe CMS is run behind a reverse proxy, it's normally necessary for this proxy to
 use the `X-Forwarded-Host` request header to tell the webserver which hostname was originally
-requested. However, when Silverstripe CMS is not run behind a proxy, this header can still be
+requested. The [`TrustedProxyMiddleware`](api:SilverStripe\Control\Middleware\TrustedProxyMiddleware) ensures only trusted IP addresses are allowed to use
+that header to override the host header in Silverstripe CMS.
+
+Without that middleware, the `X-Forwarded-Host` header could be
 used by attackers to fool the server into mistaking its own identity.
 
 The risk of this kind of attack causing damage is especially high on sites which utilise caching
 mechanisms, as rewritten urls could persist between requests in order to misdirect other users
 into visiting external sites.
 
-In order to prevent this kind of attack, it's necessary to whitelist trusted proxy
-server IPs using the SS_TRUSTED_PROXY_IPS define in your `.env`.
+In order to prevent this kind of attack, if your project is behind a reverse proxy, it's necessary to define the trusted proxy
+server IP addresses in an allow list.
+
+The primary way to define this allow list is using the `SS_TRUSTED_PROXY_IPS` environment variable:
 
 ```bash
 SS_TRUSTED_PROXY_IPS="127.0.0.1,192.168.0.1"
 ```
 
-You can also whitelist subnets in CIDR notation if you don't know the exact IP of a trusted proxy.
-For example, some cloud provider load balancers don't have fixed IPs.
+You can also allow subnets in CIDR notation if you don't know the exact IP of a trusted proxy.
+For example, some cloud provider load balancers don't have fixed IP addresses.
 
 ```bash
 SS_TRUSTED_PROXY_IPS="10.10.0.0/24,10.10.1.0/24,10.10.2.0/24"
 ```
 
+You can also define the allow list using YAML configuration:
+
+```yml
+---
+after: requestprocessors
+---
+SilverStripe\Core\Injector\Injector:
+  SilverStripe\Control\Middleware\TrustedProxyMiddleware:
+    properties:
+      TrustedProxyIPs:
+        - '127.0.0.1'
+        - '192.168.0.1'
+```
+
+If there is no proxy server, 'none' can be used to explicitly distrust all clients.
+If only trusted servers will make requests then you can use '*' to trust all clients.
+Otherwise a comma separated list of individual IP addresses (or subnets in CIDR notation) should be declared.
+
+At the same time, you'll also need to define which headers you trust from these proxy IPs. Since there are multiple ways through which proxies can pass through HTTP information on the original hostname, IP and protocol, these values need to be adjusted for your specific proxy. The header names match their equivalent `$_SERVER` values.
+
 If you wish to change the headers that are used to find the proxy information, you should reconfigure the
-TrustedProxyMiddleware service:
+`TrustedProxyMiddleware` service:
 
 ```yml
 SilverStripe\Control\TrustedProxyMiddleware:
@@ -707,33 +768,6 @@ SilverStripe\Control\TrustedProxyMiddleware:
     ProxySchemeHeaders: X-Forwarded-Protocol
     ProxyIPHeaders: X-Forwarded-Ip
 ```
-
-```bash
-SS_TRUSTED_PROXY_HOST_HEADER="HTTP_X_FORWARDED_HOST"
-SS_TRUSTED_PROXY_IP_HEADER="HTTP_X_FORWARDED_FOR"
-SS_TRUSTED_PROXY_PROTOCOL_HEADER="HTTP_X_FORWARDED_PROTOCOL"
-```
-
-At the same time, you'll also need to define which headers you trust from these proxy IPs. Since there are multiple ways through which proxies can pass through HTTP information on the original hostname, IP and protocol, these values need to be adjusted for your specific proxy. The header names match their equivalent `$_SERVER` values.
-
-If there is no proxy server, 'none' can be used to distrust all clients.
-If only trusted servers will make requests then you can use '*' to trust all clients.
-Otherwise a comma separated list of individual IP addresses (or subnets in CIDR notation) should be declared.
-
-This behaviour is enabled whenever `SS_TRUSTED_PROXY_IPS` is defined, or if the
-`BlockUntrustedIPs` environment variable is declared. It is advisable to include the
-following in your .htaccess to ensure this behaviour is activated.
-
-```text
-<IfModule mod_env.c>
-    # Ensure that X-Forwarded-Host is only allowed to determine the request
-    # hostname for servers ips defined by SS_TRUSTED_PROXY_IPS in your .env
-    # Note that in a future release this setting will be always on.
-    SetEnv BlockUntrustedIPs true
-</IfModule>
-```
-
-This behaviour is on by default; the environment variable is not required. For correct operation, it is necessary to always set `SS_TRUSTED_PROXY_IPS` if using a proxy.
 
 ## Secure sessions, cookies and TLS (HTTPS)
 
