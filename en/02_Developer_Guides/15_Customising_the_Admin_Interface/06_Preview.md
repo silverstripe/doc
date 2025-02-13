@@ -436,12 +436,12 @@ class ProductPage extends Page
     public function MetaTags($includeTitle = true)
     {
         $tags = parent::MetaTags($includeTitle);
-        if (!Controller::has_curr()) {
+        $controller = Controller::curr();
+        if ($controller === null) {
             return;
         }
         // If the 'DataObjectPreview' GET parameter is present, remove 'x-page-id' and 'x-cms-edit-link' meta tags.
         // This ensures that toggling between draft/published states doesn't revert the CMS to the page's edit form.
-        $controller = Controller::curr();
         $request = $controller->getRequest();
         if ($request->getVar('DataObjectPreview') !== null) {
             $html = HTMLValue::create($tags);
